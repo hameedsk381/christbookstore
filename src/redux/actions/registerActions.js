@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { serverUrl } from '../../apis/serverapi';
 export const REGISTER_REQUEST = 'REGISTER_REQUEST';
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
 export const REGISTER_FAILURE = 'REGISTER_FAILURE';
@@ -21,7 +22,7 @@ export const registerFailure = (error) => ({
 export const registerUser = (credentials) => async (dispatch) => {
     dispatch(registerRequest());
     try {
-        const response = await axios.post('http://localhost:5000/api/register', credentials);
+        const response = await axios.post(`${serverUrl}/api/register`, credentials);
         const { data } = response;
         dispatch(registerSuccess(data));
         localStorage.setItem('user', JSON.stringify(data)); // Store the user in local storage

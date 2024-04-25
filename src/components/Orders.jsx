@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Chip } from '@mui/material';
 import axios from 'axios';
+import { serverUrl } from '../apis/serverapi';
 
 const Orders = () => {
   const [ordersData,setOrdersData] = useState([]);
   useEffect(() => {
-    axios.get('http://localhost:5000/api/orders')
+    axios.get(`${serverUrl}/api/orders`)
       .then(response => {
         setOrdersData(response.data);
       })

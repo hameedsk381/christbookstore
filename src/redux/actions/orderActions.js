@@ -1,5 +1,6 @@
 import axios from "axios";
 import { resetCart } from "./cartActions";
+import { serverUrl } from "../../apis/serverapi";
 
 // Action Types
 export const PLACE_ORDER_REQUEST = 'PLACE_ORDER_REQUEST';
@@ -45,7 +46,7 @@ const order = {
   shippingAddress,orderItems,totalPrice,paymentMethod:shippingDetails.paymentMethod
 }
     try {
-      const response = await axios.post('http://localhost:5000/api/orders', order, {
+      const response = await axios.post(`${serverUrl}/api/orders`, order, {
         headers: {
           'Content-Type': 'application/json',
         },

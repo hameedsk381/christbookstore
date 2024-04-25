@@ -3,6 +3,7 @@ import { Grid, TextField, Typography, FormControl, InputLabel, Select, MenuItem,
 import ProductCard from './ProductCard';
 import { useQuery } from 'react-query';
 import axios from 'axios';
+import { serverUrl } from '../apis/serverapi';
 const categories = ['Fiction', 'Non-Fiction', 'Science Fiction', 'Mystery', 'Thriller', 'Romance', 'Fantasy', 'Biography', 'Self-Help', 'Cooking', 'History', 'Poetry'];
 
 function ProductGrid() {
@@ -14,7 +15,7 @@ function ProductGrid() {
 
     // Fetch inventory items using React Query
     const { isLoading, isError, data: inventoryItems } = useQuery('inventoryItems', async () => {
-        const response = await axios.get('http://localhost:5000/api/inventory'); // Replace 'YOUR_API_ENDPOINT' with your actual API endpoint
+        const response = await axios.get(`${serverUrl}/api/inventory`); // Replace 'YOUR_API_ENDPOINT' with your actual API endpoint
         return response.data;
     });
 

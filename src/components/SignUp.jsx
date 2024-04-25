@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { registerUser } from '../redux/actions/registerActions';
 import { validateCredentials } from '../utils/formValdation';
+import { serverUrl } from '../apis/serverapi';
 
 
 function SignUp({handleSignup}) {
@@ -45,7 +46,7 @@ function SignUp({handleSignup}) {
 setLoading(true);
         try {
             const { confirmPassword, ...userData } = userDetails;
-            const response = await axios.post('http://localhost:5000/api/register', userData);
+            const response = await axios.post(`${serverUrl}/api/register`, userData);
             // Handle success
             handleSignup();
             console.log(response.data);

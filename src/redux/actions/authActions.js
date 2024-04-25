@@ -1,5 +1,6 @@
 // src/redux/actions/authActions.js
 import axios from 'axios';
+import { serverUrl } from '../../apis/serverapi';
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
@@ -34,7 +35,7 @@ export const clearLoginError = () => ({
 export const loginUser = (credentials) => async (dispatch) => {
     dispatch(loginRequest());
     try {
-        const response = await axios.post('http://localhost:5000/api/login', credentials);
+        const response = await axios.post(`${serverUrl}/api/login`, credentials);
         const { data } = response;
         dispatch(loginSuccess(data));
         localStorage.setItem('user', JSON.stringify(data));
@@ -67,7 +68,7 @@ export const clearRegisterError = () => ({
 export const registerUser = (credentials) => async (dispatch) => {
     dispatch(registerRequest());
     try {
-        const response = await axios.post('http://localhost:5000/api/register', credentials);
+        const response = await axios.post(`${serverUrl}/api/register`, credentials);
         const { data } = response;
         dispatch(registerSuccess(data));
         localStorage.setItem('user', JSON.stringify(data)); // Optionally save the user data in local storage

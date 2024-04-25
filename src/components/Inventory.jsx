@@ -5,8 +5,9 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
 import { useQuery } from 'react-query';
+import { serverUrl } from '../apis/serverapi';
 
-const API_BASE_URL = 'http://localhost:5000/api'; // Update with your API base URL
+const API_BASE_URL = `${serverUrl}/api`; // Update with your API base URL
 
 const fetchInventory = async () => {
     try {
