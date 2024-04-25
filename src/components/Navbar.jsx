@@ -15,7 +15,8 @@ function Navbar() {
     const [isCartDrawerOpen, setCartDrawerOpen] = useState(false);
     const [isLoginOpen, setLoginOpen] = useState(false);
     const [isSignupOpen, setSignupOpen] = useState(false);
-    const loginSuccess = useSelector(state=>state.auth.isLoggedIn)
+    const loginSuccess = useSelector(state=>state.auth.isLoggedIn);
+    const username = useSelector(state=>state.auth.user);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const cartItems = useSelector(state => state.cart.items);
@@ -38,7 +39,7 @@ function Navbar() {
     };
 
     return (
-        <AppBar position="static" color="transparent">
+        <AppBar position="static" color="secondary">
             <Toolbar sx={{ justifyContent: 'space-between' }}>
                 <Typography component={Link} to={'/'} variant="h6">
                    <Church/> 
@@ -46,20 +47,18 @@ function Navbar() {
                 <div>
                     {loginSuccess ? (
                         <>
-                            {isMobile ? (
-                                <IconButton color="inherit" onClick={toggleCartDrawer}>
+                             <IconButton color="inherit" onClick={() => navigate('/profile')}>
+                                        <AccountCircle />
+                                    </IconButton>
+                                 <Button color="inherit" onClick={handleLogout}>Logout</Button>
+                                   
+                                  <IconButton color="inherit" onClick={toggleCartDrawer}>
                                     <Badge badgeContent={cartItems.length} color="primary">
                                         <ShoppingCartOutlined />
                                     </Badge>
                                 </IconButton>
-                            ) : (
-                                <>
-                                    <Button color="inherit" onClick={handleLogout}>Logout</Button>
-                                    <IconButton color="inherit" onClick={() => navigate('/profile')}>
-                                        <AccountCircle />
-                                    </IconButton>
-                                </>
-                            )}
+                                   
+                              
                         </>
                     ) : (
                         <>

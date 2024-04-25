@@ -4,43 +4,43 @@ import { Link } from 'react-router-dom';
 
 function Footer() {
     return (
-        <Box component="footer" sx={{ bgcolor: 'background.paper', py: 6 }}>
-            <Container maxWidth="lg">
+        <Box component="footer" sx={{ bgcolor: 'secondary.main', py: 6 }}>
+            <Container maxWidth="lg" sx={{color:'whitesmoke'}}>
                 <Grid container spacing={4}>
                     <Grid item xs={12} sm={4}>
-                        <Typography variant="h6" color="text.primary" gutterBottom>
+                        <Typography variant="h6" gutterBottom>
                             About Us
                         </Typography>
-                        <Typography variant="body2" color="text.secondary">
+                        <Typography variant="body2" >
                             Learn more about our company and our mission to provide the best service.
                         </Typography>
-                        <Link href="/about" color="primary">
+                        <Link style={{color:'indigo'}} to="/about" >
                             Learn More
                         </Link>
                     </Grid>
                     <Grid item xs={12} sm={4}>
-                        <Typography variant="h6" color="text.primary" gutterBottom>
+                        <Typography variant="h6" gutterBottom>
                             Contact Us
                         </Typography>
-                        <Typography variant="body2" color="text.secondary">
+                        <Typography variant="body2" >
                             Have any questions? Reach out to us at:
                         </Typography>
-                        <Typography variant="body2" color="text.secondary">
+                        <Typography variant="body2" >
                             Email: contact@example.com
                         </Typography>
-                        <Typography variant="body2" color="text.secondary">
+                        <Typography variant="body2" >
                             Phone: (123) 456-7890
                         </Typography>
                     </Grid>
                     <Grid item xs={12} sm={4}>
-                        <Typography variant="h6" color="text.primary" gutterBottom>
+                        <Typography variant="h6" gutterBottom>
                             Quick Links
                         </Typography>
-                        <Link to="/terms" color="primary" display="block">
+                        <Link style={{color:'indigo'}} to="/terms"  display="block">
                             Terms of Service
                         </Link>
                         <br />
-                        <Link to="/privacy" color="primary" display="block">
+                        <Link style={{color:'indigo'}} to="/privacy"  display="block">
                             Privacy Policy
                         </Link>
                     </Grid>

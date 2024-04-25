@@ -79,7 +79,7 @@ const CheckoutPage = () => {
 
     return (
         <>
-            <Navbar />
+           
             {cartItems.length === 0 ? <EmptyCart/> :  <Container sx={{ my: 5 }}>
                 {loading && (
                     <Box display="flex" justifyContent="center" my={5}>
