@@ -3,7 +3,7 @@ import { serverUrl } from './serverapi';
 
 // Set up a reusable axios instance
 const api = axios.create({
-    baseURL: `${serverUrl}`, // Change this to your API's URL
+    baseURL: `${serverUrl}/api`, // Change this to your API's URL
 });
 
 api.interceptors.request.use(function(config) {
