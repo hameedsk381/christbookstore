@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { AppBar, Toolbar, IconButton, Typography, Badge, Button, Dialog, DialogTitle, DialogContent, TextField, DialogActions, Drawer, Container, useMediaQuery } from '@mui/material';
+import { AppBar, Toolbar, IconButton, Typography, Badge, Button, Dialog, DialogTitle, DialogContent, TextField, DialogActions, Drawer, Container, useMediaQuery, Avatar } from '@mui/material';
 import ShoppingCartOutlined from '@mui/icons-material/ShoppingCartOutlined';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { useSelector, useDispatch } from 'react-redux';
@@ -10,7 +10,7 @@ import CartPage from './CartPage';
 import Login from './Login';
 import SignUp from './SignUp';
 import { Church } from '@mui/icons-material';
-
+import logo from '/teluguchristianlogo.png'
 function Navbar() {
     const [isCartDrawerOpen, setCartDrawerOpen] = useState(false);
     const [isLoginOpen, setLoginOpen] = useState(false);
@@ -42,7 +42,7 @@ function Navbar() {
         <AppBar position="static" color="secondary">
             <Toolbar sx={{ justifyContent: 'space-between' }}>
                 <Typography component={Link} to={'/'} variant="h6">
-                   <Church/> 
+                <Avatar src={logo} alt="Logo" />
                 </Typography>
                 <div>
                     {loginSuccess ? (
