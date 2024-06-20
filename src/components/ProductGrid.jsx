@@ -64,7 +64,7 @@ function ProductGrid() {
     if (isError) return <div>Error fetching data</div>;
 
     return (
-        <Container component={Stack} direction={'row'} mb={20} px={10}>
+        <Container component={Stack} direction={'row'} my={20} px={10}>
              {/* <Paper variant='outlined'>
                     <Typography bgcolor={'#f5f5f5'} p={2} variant="h5" sx={{ marginBottom: '10px' }}>Price</Typography>
                     <Box sx={{ p: 2 }}>
