@@ -81,10 +81,10 @@ const SongActions = () => {
   return (
     <Container maxWidth='lg' >
       <Stack direction="row" spacing={2}  >
-        <Button fullWidth variant="contained" color="primary" onClick={isMobile ? toggleRequestDrawer(true) : toggleRequestModal(true)}>
+        <Button size={isMobile ? 'small': 'large'} fullWidth variant="contained" color="primary" onClick={isMobile ? toggleRequestDrawer(true) : toggleRequestModal(true)}>
           Request a Song
         </Button>
-        <Button fullWidth variant="contained" color="secondary" onClick={isMobile ? togglePostDrawer(true) : togglePostModal(true)}>
+        <Button size={isMobile ? 'small': 'large'} fullWidth variant="contained" color="secondary" onClick={isMobile ? togglePostDrawer(true) : togglePostModal(true)}>
           Post a Song
         </Button>
       </Stack>
