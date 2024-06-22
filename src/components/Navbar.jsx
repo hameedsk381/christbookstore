@@ -12,7 +12,7 @@ import logo from '/teluguchristianlogo.png';
 import Header from './Header';
 import SearchBar from './SearchBar'; // Import the SearchBar component
 
-function Navbar({cart}) {
+function Navbar({cart,header}) {
     const [isCartDrawerOpen, setCartDrawerOpen] = useState(false);
     const [isLoginOpen, setLoginOpen] = useState(false);
     const [isSignupOpen, setSignupOpen] = useState(false);
@@ -58,8 +58,8 @@ function Navbar({cart}) {
     }, []);
 
     return (
-        <AppBar position="sticky" color={"inherit"} elevation={isScrolled ? 4 : 0}>
-            <Header/>
+        <AppBar position="sticky" color={"inherit"} elevation={0}>
+        {header &&     <Header/>}
             <Toolbar sx={{ justifyContent: 'space-between'  }}>
                 <Typography component={Link} to={'/'} variant="h6">
                     <Avatar variant='square' src={'logo2.jpeg'} alt="Logo" sx={{ width: 56, height: 56 }} />

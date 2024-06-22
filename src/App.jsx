@@ -15,7 +15,8 @@ import { useLocation } from 'react-router-dom';
 import StorePage from './components/StorePage';
 import LandingPage from './components/LandingPage';
 import SongStore from './components/SongStore';
-
+import BibleMessagesFeed from './components/BibleMessagesFeed'
+import WordForTheDay from './components/WordForTheDay'
 const ScrollToTop = () => {
   const location = useLocation(); // This hook returns the location object that represents the current URL.
 
@@ -44,6 +45,8 @@ const App = () => {
   <Route exact path="/" element={ <LandingPage/>} />
   <Route exact path="/store" element={<StorePage />} />
   <Route exact path="/songs" element={<SongStore />} />
+  <Route exact path="/feed" element={<BibleMessagesFeed />} />
+  <Route exact path="/word-for-the-day" element={<WordForTheDay />} />
   <Route exact path="/product-details/:id" element={<ProductDetailsPage />} />
   <Route exact path="/checkout" element={<CheckoutPage />} />
   <Route path="/admin" element={<Admin/>} />

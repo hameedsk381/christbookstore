@@ -12,7 +12,7 @@ import { offers } from '../data/offers';
 import MediaCover from './MediaCover';
 import { teluguAlphabets } from '../data/alphabets';
 
-function ProductGrid({products,banners,categories,loading,error,songActions}) {
+function ProductGrid({products,banners,categories,loading,error,songActions,alphabets}) {
     const [searchTerm, setSearchTerm] = useState('');
     const [checkedCategories, setCheckedCategories] = useState([]);
     const [checkedAlphabets, setCheckedAlphabets] = useState([]);
@@ -81,9 +81,9 @@ function ProductGrid({products,banners,categories,loading,error,songActions}) {
            
           
           
-            {/* <Stack direction={'row'} display={{xs:"none",md:'flex'}} spacing={1} my={3} justifyContent="flex-start" flexWrap="wrap" px={2}>
+           {categories &&  <Stack direction={'row'} display={{xs:"none",md:'flex'}} spacing={1} my={3} justifyContent="flex-start" flexWrap="wrap" px={2}>
               
-                {categories && categories.map((category) => (
+                {categories.map((category) => (
                     <Chip size='medium' variant='filled'
                         key={category}
                         label={category}
@@ -99,8 +99,8 @@ function ProductGrid({products,banners,categories,loading,error,songActions}) {
                         }}
                     />
                 ))}
-            </Stack> */}
-            <Stack direction={'row'} spacing={1} my={3} justifyContent="flex-start" flexWrap="wrap">
+            </Stack>}
+           {alphabets &&  <Stack direction={'row'} spacing={1} my={3} justifyContent="flex-start" flexWrap="wrap">
                 {teluguAlphabets && teluguAlphabets.map((alphabet) => (
                     <Chip size='small' variant='outlined'
                         key={alphabet}
@@ -117,7 +117,7 @@ function ProductGrid({products,banners,categories,loading,error,songActions}) {
                         }}
                     />
                 ))}
-            </Stack>
+            </Stack>}
 
             {groupedProducts && Object.keys(groupedProducts).map(category => (
                 <Container key={category} sx={{ my: 4 }}>

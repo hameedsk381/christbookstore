@@ -18,7 +18,7 @@ const SongStore = () => {
   return (
   <>
   <Navbar/>
-  <ProductGrid categories={songcategories} products={inventoryItems} banners={offers} loading={isLoading} error={isError} songActions={<SongActions/>}/>
+  <ProductGrid alphabets categories={songcategories} products={inventoryItems} banners={offers} loading={isLoading} error={isError} songActions={<SongActions/>}/>
   </>
   )
 }

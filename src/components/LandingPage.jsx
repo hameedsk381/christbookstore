@@ -97,7 +97,7 @@ const LandingPage = () => {
           <Grid item xs={12} sm={6} md={3}>
             <MediaCover
               imageUrl="https://images.unsplash.com/photo-1476231682828-37e571bc172f?auto=format&fit=crop&w=800"
-              navigateTo="bible-messages"
+              navigateTo="feed"
               icon={<BookOutlined sx={{ fontSize: 50, color: 'white' }} />}
               title="Read Bible Messages"
             />
