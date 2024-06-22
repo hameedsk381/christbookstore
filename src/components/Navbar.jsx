@@ -9,13 +9,15 @@ import CartPage from './CartPage';
 import Login from './Login';
 import SignUp from './SignUp';
 import logo from '/teluguchristianlogo.png';
+import Header from './Header';
+import SearchBar from './SearchBar'; // Import the SearchBar component
 
-function Navbar() {
+function Navbar({cart}) {
     const [isCartDrawerOpen, setCartDrawerOpen] = useState(false);
     const [isLoginOpen, setLoginOpen] = useState(false);
     const [isSignupOpen, setSignupOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
-    
+
     const loginSuccess = useSelector(state => state.auth.isLoggedIn);
     const username = useSelector(state => state.auth.user);
     const dispatch = useDispatch();
@@ -40,6 +42,7 @@ function Navbar() {
         dispatch(logout());
     };
 
+
     useEffect(() => {
         const handleScroll = () => {
             if (window.scrollY > 0) {
@@ -56,11 +59,13 @@ function Navbar() {
 
     return (
         <AppBar position="sticky" color={"inherit"} elevation={isScrolled ? 4 : 0}>
-            <Toolbar sx={{ justifyContent: 'space-between' }}>
+            <Header/>
+            <Toolbar sx={{ justifyContent: 'space-between'  }}>
                 <Typography component={Link} to={'/'} variant="h6">
                     <Avatar variant='square' src={'logo2.jpeg'} alt="Logo" sx={{ width: 56, height: 56 }} />
                 </Typography>
-                <div>
+                
+               {cart &&  <div>
                     {loginSuccess ? (
                         <>
                             <IconButton color="inherit" onClick={() => navigate('/profile')}>
@@ -84,7 +89,7 @@ function Navbar() {
                             </IconButton>
                         </>
                     )}
-                </div>
+                </div>}
             </Toolbar>
 
             {/* Login Dialog */}

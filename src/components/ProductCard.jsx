@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, CardActionArea, CardContent, CardMedia, Typography, Button, CardActions, IconButton } from '@mui/material';
+import { Card, CardActionArea, CardContent, CardMedia, Typography, Button, CardActions, IconButton, Grid } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../redux/actions/cartActions';
 import { Add, Remove, ShoppingBag } from '@mui/icons-material';
@@ -9,7 +9,6 @@ const ProductCard = ({ product }) => {
     const dispatch = useDispatch();
     const [quantity, setQuantity] = useState(1);
     const cartItems = useSelector(state => state.cart.items);
-    
 
     const handleAddToCart = () => {
         dispatch(addToCart({ ...product, quantity }));
@@ -25,7 +24,6 @@ const ProductCard = ({ product }) => {
         }
     };
 
-    // Check if the product is already in the cart
     const isInCart = cartItems.some(item => item._id === product._id);
 
     return (
@@ -34,7 +32,7 @@ const ProductCard = ({ product }) => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
         >
-            <Card>
+            <Card sx={{ width: '100%' }}>
                 <CardActionArea>
                     <CardMedia
                         component="img"
@@ -43,37 +41,41 @@ const ProductCard = ({ product }) => {
                         alt={product.title}
                     />
                     <CardContent>
-                        <Typography gutterBottom variant="h5" component="div">
+                        <Typography gutterBottom variant="h6" component="div" noWrap>
                             {product.title}
                         </Typography>
-                        <Typography variant="body2" color="text.secondary">
+                        <Typography variant="body2" color="text.secondary" noWrap>
                             {product.author}
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
                             Price: {product.price}
                         </Typography>
-                        {/* <Typography variant="body2" color="text.secondary">
-                            Stock: {product.stock}
-                        </Typography> */}
                     </CardContent>
                 </CardActionArea>
-                <CardActions sx={{ justifyContent: 'space-between', padding: '16px' }}>
-                  {!isInCart &&   <div>
-                        <IconButton disabled={quantity === 1} size="small" variant="outlined" color="primary" onClick={handleDecreaseQuantity} sx={{ marginRight: '8px' }}><Remove /></IconButton>
-                        <Typography variant="body1" sx={{ display: 'inline', fontWeight: 'bold' }}>{quantity}</Typography>
-                        <IconButton disabled={quantity >= product.stock} size="small" variant="outlined" color="primary" onClick={handleIncreaseQuantity} sx={{ marginLeft: '8px' }}><Add /></IconButton>
-                    </div>}
+                <CardActions sx={{ justifyContent: 'space-between', padding: '8px' }}>
+                    {!isInCart && (
+                        <div>
+                            <IconButton disabled={quantity === 1} size="small" variant="outlined" color="primary" onClick={handleDecreaseQuantity} sx={{ marginRight: '8px' }}>
+                                <Remove />
+                            </IconButton>
+                            <Typography variant="body1" sx={{ display: 'inline', fontWeight: 'bold' }}>
+                                {quantity}
+                            </Typography>
+                            <IconButton disabled={quantity >= product.stock} size="small" variant="outlined" color="primary" onClick={handleIncreaseQuantity} sx={{ marginLeft: '8px' }}>
+                                <Add />
+                            </IconButton>
+                        </div>
+                    )}
                     <Button
-    size="small"
-    color="primary"
-    sx={{ fontWeight: 'bold' }}
-    onClick={handleAddToCart}
-    disabled={isInCart} // Disable the button if the product is already in the cart
-    startIcon={<ShoppingBag/>}
->
-    {isInCart ? 'Added to Cart' : 'Add to Cart'}
-</Button>
-
+                        size="small"
+                        color="primary"
+                        sx={{ fontWeight: 'bold' }}
+                        onClick={handleAddToCart}
+                        disabled={isInCart}
+                        startIcon={<ShoppingBag />}
+                    >
+                        {isInCart ? 'Added to Cart' : 'Add to Cart'}
+                    </Button>
                 </CardActions>
             </Card>
         </motion.div>

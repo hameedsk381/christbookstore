@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { TextField, Button, Typography, Container, Box, CircularProgress, Snackbar, Alert } from '@mui/material';
+import { TextField, Button, Typography, Container, Box, CircularProgress, Snackbar, Alert, Avatar } from '@mui/material';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { registerUser } from '../redux/actions/registerActions';
@@ -68,9 +68,7 @@ setLoading(true);
     return (
         <Container component="main" maxWidth="xs">
             <Box sx={{ marginTop: 8, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <Typography component="h1" variant="h5">
-                    Sign Up
-                </Typography>
+            <Avatar variant='square' src={'logo2.jpeg'} alt="Logo" sx={{ width: 56, height: 56 }} />
                 <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
                     <TextField
                         margin="normal"

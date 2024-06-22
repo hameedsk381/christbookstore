@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Box, TextField, Button, Typography, Container, CircularProgress, Alert } from '@mui/material';
+import { Box, TextField, Button, Typography, Container, CircularProgress, Alert, Avatar } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearLoginError, loginUser } from '../redux/actions/authActions';
 
@@ -37,9 +37,7 @@ function Login({handleLogin}) {
     return (
         <Container component="main" maxWidth="xs">
             <Box sx={{ marginTop: 8, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <Typography component="h1" variant="h5">
-                    Sign in
-                </Typography>
+            <Avatar variant='square' src={'logo2.jpeg'} alt="Logo" sx={{ width: 56, height: 56 }} />
                 {error && <Alert severity="error" sx={{ width: '100%', mt: 2 }}>{error}</Alert>}
                 <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
                     <TextField

@@ -1,125 +1,148 @@
 import React, { useState } from 'react';
-import { Grid, TextField, Typography, FormControl, InputLabel, Select, MenuItem, Slider, Box, Container, Paper, Stack, FormControlLabel, Checkbox } from '@mui/material';
+import { Grid, Typography, Container, Stack, Chip, useMediaQuery, Box } from '@mui/material';
 import ProductCard from './ProductCard';
 import { useQuery } from 'react-query';
 import axios from 'axios';
 import { serverUrl } from '../apis/serverapi';
-const categories = ['Fiction', 'Non-Fiction', 'Science Fiction', 'Mystery', 'Thriller', 'Romance', 'Fantasy', 'Biography', 'Self-Help', 'Cooking', 'History', 'Poetry'];
+import SearchBar from './SearchBar';
+import OffersPoster from './OffersPoster';
+import BlinkingComponentSwitcher from './BlinkingComponentSwitcher';
+import { offers } from '../data/offers';
 
-function ProductGrid() {
+import MediaCover from './MediaCover';
+import { teluguAlphabets } from '../data/alphabets';
+
+function ProductGrid({products,banners,categories,loading,error,songActions}) {
     const [searchTerm, setSearchTerm] = useState('');
-    const [filterCategory, setFilterCategory] = useState('All');
-    const [priceRange, setPriceRange] = useState([0, 100]);
     const [checkedCategories, setCheckedCategories] = useState([]);
-    const [sortBy, setSortBy] = useState('latest'); // Default sort by latest
+    const [checkedAlphabets, setCheckedAlphabets] = useState([]);
+    const isMobile = useMediaQuery(theme => theme.breakpoints.down('sm'));
 
-    // Fetch inventory items using React Query
-    const { isLoading, isError, data: inventoryItems } = useQuery('inventoryItems', async () => {
-        const response = await axios.get(`${serverUrl}/api/inventory`); // Replace 'YOUR_API_ENDPOINT' with your actual API endpoint
-        return response.data;
-    });
+ 
 
     // Filter products based on search term, category, and price range
-    let filteredProducts = inventoryItems?.filter(product =>
+    let filteredProducts = products?.filter(product =>
         (checkedCategories.length === 0 || checkedCategories.includes(product.category)) &&
-        (parseFloat(product.price) >= priceRange[0] && parseFloat(product.price) <= priceRange[1]) &&
+        (checkedAlphabets.length === 0 || checkedAlphabets.some(alphabet => product.title.includes(alphabet))) && 
         Object.values(product).some(field =>
             typeof field === 'string' && field.toLowerCase().includes(searchTerm.toLowerCase())
         )
     );
 
-    // Sorting logic
-    if (filteredProducts) {
-        if (sortBy === 'priceLowToHigh') {
-            filteredProducts = filteredProducts.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
-        } else if (sortBy === 'priceHighToLow') {
-            filteredProducts = filteredProducts.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
-        } else if (sortBy === 'name') {
-            filteredProducts = filteredProducts.sort((a, b) => a.title.localeCompare(b.title));
-        } else if (sortBy === 'latest') {
-            filteredProducts = filteredProducts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-        }
-    }
 
-    const handleCheckboxChange = (event) => {
-        if (event.target.checked) {
-            setCheckedCategories([...checkedCategories, event.target.name]);
+    const handleCategoryChange = (category) => {
+        if (checkedCategories.includes(category)) {
+            setCheckedCategories(checkedCategories.filter(c => c !== category));
         } else {
-            setCheckedCategories(checkedCategories.filter(category => category !== event.target.name));
+            setCheckedCategories([...checkedCategories, category]);
         }
     };
-    const handleCategoryChange = (event) => {
-        setFilterCategory(event.target.value);
+
+    const handleAlphabetChange = (alphabet) => {
+        if (checkedAlphabets.includes(alphabet)) {
+            setCheckedAlphabets(checkedAlphabets.filter(a => a !== alphabet));
+        } else {
+            setCheckedAlphabets([...checkedAlphabets, alphabet]);
+        }
     };
 
-    const handleSliderChange = (event, newValue) => {
-        setPriceRange(newValue);
-    };
-
-    const handleSortChange = (event) => {
-        setSortBy(event.target.value);
-    };
-
-    if (isLoading) return <div>Loading...</div>;
-    if (isError) return <div>Error fetching data</div>;
-
+    if (loading) return <div>Loading...</div>;
+    if (error) return <div>Error fetching data</div>;
+ // Group filtered products by category
+ const groupedProducts = filteredProducts?.reduce((groups, product) => {
+    const category = product.category;
+    if (!groups[category]) {
+        groups[category] = [];
+    }
+    groups[category].push(product);
+    return groups;
+}, {});
     return (
-        <Container component={Stack} direction={'row'} my={20} px={10}>
-             {/* <Paper variant='outlined'>
-                    <Typography bgcolor={'#f5f5f5'} p={2} variant="h5" sx={{ marginBottom: '10px' }}>Price</Typography>
-                    <Box sx={{ p: 2 }}>
-                        <Slider
-                            value={priceRange}
-                            onChange={handleSliderChange}
-                            valueLabelDisplay="auto"
-                            min={0}
-                            max={100}
-                            step={1}
-                        />
-                        <Stack justifyContent={'space-between'} direction={'row'}>
-                            <Typography>$0 </Typography> <Typography>$100</Typography>
-                        </Stack>
-                    </Box>
-                </Paper> */}
-          <Box>
-          <Stack spacing={2} justifyContent={'space-between'} direction={{ xs: 'column', md: 'row' }} sx={{ pb: 2 }}>
-                <TextField
-                    size='small'
-                    label="Search by name"
-                    variant="outlined"
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                />
-             <Stack direction={'row'} spacing={2} sx={{ pb: 2 }}>
-              
-                <FormControl sx={{ minWidth: 120 }}>
-                    <InputLabel  id="sort-by-label">Sort By</InputLabel>
-                    <Select
-                      variant='standard'
-                        labelId="sort-by-label"
-                        id="sort-by"
-                        value={sortBy}
-                        onChange={handleSortChange}
-                    >
-                        
-                        <MenuItem value="latest">Latest</MenuItem>
-                        <MenuItem value="priceLowToHigh">Price: Low to High</MenuItem>
-                        <MenuItem value="priceHighToLow">Price: High to Low</MenuItem>
-                        <MenuItem value="name">Name</MenuItem>
-                    </Select>
-                </FormControl>
+        <Container sx={{ pb: 6 }} maxWidth='lg'>
+            <Stack spacing={2} justifyContent={'center'} direction={{ xs: 'column', md: 'row' }}>
+                <SearchBar onSearch={(e) => setSearchTerm(e.target.value)} searchvalue={searchTerm} />
+                {songActions}
             </Stack>
-            </Stack>
+            {searchTerm === '' && checkedCategories.length === 0 && checkedAlphabets.length === 0 && (
+                isMobile ? (
+                    <Container sx={{height:220,mt:2}}>
+                        <BlinkingComponentSwitcher components={banners.map(offer => (
+                        <MediaCover 
+                        imageUrl={offer.imageUrl}
+                        navigateTo={offer.navigateUrl}
+                       
+                      />
+                    ))} />
+                    </Container>
+                ) : (
+                    <OffersPoster offers={banners} />
+                )
+            )}
            
-            {searchTerm !== '' && <Typography variant='body1' my={2}>Showing results for "{searchTerm}"</Typography>}
-            <Grid container spacing={2}>
-                {filteredProducts.map((product) => (
-                    <Grid item key={product._id} xs={12} sm={6} md={3}>
-                        <ProductCard product={product} />
-                    </Grid>
+          
+          
+            {/* <Stack direction={'row'} display={{xs:"none",md:'flex'}} spacing={1} my={3} justifyContent="flex-start" flexWrap="wrap" px={2}>
+              
+                {categories && categories.map((category) => (
+                    <Chip size='medium' variant='filled'
+                        key={category}
+                        label={category}
+                        clickable
+                        onClick={() => handleCategoryChange(category)}
+                        sx={{
+                            my:2, // Add margin bottom for spacing between lines
+                            backgroundColor: checkedCategories.includes(category) ? 'primary.main' : 'default',
+                            color: checkedCategories.includes(category) ? 'white' : 'default',
+                            '&:hover': {
+                                backgroundColor: checkedCategories.includes(category) ? 'primary.dark' : 'grey.300',
+                            }
+                        }}
+                    />
                 ))}
-            </Grid>
-          </Box>
+            </Stack> */}
+            <Stack direction={'row'} spacing={1} my={3} justifyContent="flex-start" flexWrap="wrap">
+                {teluguAlphabets && teluguAlphabets.map((alphabet) => (
+                    <Chip size='small' variant='outlined'
+                        key={alphabet}
+                        label={alphabet}
+                        clickable
+                        onClick={() => handleAlphabetChange(alphabet)}
+                        sx={{
+                            marginBottom: 2,  // Add margin bottom for spacing between lines
+                            backgroundColor: checkedAlphabets.includes(alphabet) ? 'primary.main' : 'default',
+                            color: checkedAlphabets.includes(alphabet) ? 'white' : 'default',
+                            '&:hover': {
+                                backgroundColor: checkedAlphabets.includes(alphabet) ? 'primary.dark' : 'grey.300',
+                            }
+                        }}
+                    />
+                ))}
+            </Stack>
+
+            {groupedProducts && Object.keys(groupedProducts).map(category => (
+                <Container key={category} sx={{ my: 4 }}>
+                    <Typography variant='h6' sx={{ mb: 2 }}>{category}</Typography>
+                  
+                    <Box sx={{
+                        display: 'flex',
+                        overflowX: 'auto',
+                        gap: 2,
+                        py: 2,
+                        '&::-webkit-scrollbar': {
+                            display: 'none'
+                        },
+                        '-ms-overflow-style': 'none',
+                        'scrollbar-width': 'none'
+                    }}>
+                        {groupedProducts[category].map(product => (
+                            <Box key={product._id} sx={{ minWidth: 250 }}>
+                                <ProductCard product={product} />
+                            </Box>
+                        ))}
+                    </Box>
+                </Container>
+            ))}
+           
         </Container>
     );
 }
