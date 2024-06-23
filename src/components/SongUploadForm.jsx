@@ -21,12 +21,12 @@ const SongUploadForm = () => {
       anuvaadam: '',
       paata: '',
       fileUrl: '',
-      category: '',title:''
+      category: '',title:'',songNum
     },
     validationSchema: Yup.object({
       paata: Yup.string().required('పాట అవసరం'),
       category: Yup.string().required('కేటగిరీ అవసరం'),
-      title:Yup.string().required('Please give the title'),
+      title:Yup.string().required('Please give the title'),songNum:Yup.string().required('Please give song Num')
     }),
     onSubmit: async (values) => {
       try {
@@ -65,6 +65,18 @@ const SongUploadForm = () => {
               value={formik.values.title}
               onChange={formik.handleChange}
               variant="outlined"
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              id="songNum"
+              name="songNum"
+              label="Song Number"
+              value={formik.values.songNum}
+              onChange={formik.handleChange}
+              variant="outlined"
+              type='number'
             />
           </Grid>
           <Grid item xs={12} sm={6}>
