@@ -7,6 +7,7 @@ import MediaCover from './MediaCover';
 import SongCard from './SongCard';
 import BookCard from './Bookcard';
 import { teluguAlphabets } from '../data/alphabets';
+import Loader from './Loader';
 
 function ProductGrid({ products, banners, categories, loading, error, songActions, alphabets, songs, book }) {
   const [searchTerm, setSearchTerm] = useState('');
@@ -39,7 +40,7 @@ function ProductGrid({ products, banners, categories, loading, error, songAction
     return groups;
   }, {});
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return<Loader/>;
   if (error) return <div>Error fetching data</div>;
 
   return (
@@ -117,7 +118,7 @@ function ProductGrid({ products, banners, categories, loading, error, songAction
             'scrollbar-width': 'none',
           }}>
             {groupedProducts[category].map(product => (
-              <Grid item xs={12} sm={6}  key={product._id} sx={{ maxWidth: 500 }}>
+              <Grid item xs={12} md={4}  key={product._id} >
                 {songs && <SongCard song={product} />}
                 {book && <BookCard product={product} />}
               </Grid>

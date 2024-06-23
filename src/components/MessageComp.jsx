@@ -6,6 +6,7 @@ import Navbar from './Navbar';
 import { Share } from '@mui/icons-material';
 import axios from 'axios';
 import { serverUrl } from '../apis/serverapi';
+import Loader from './Loader';
 
 const MessageComp = () => {
   const { id } = useParams();
@@ -33,11 +34,11 @@ const MessageComp = () => {
     <>
       <Navbar />
       <Container maxWidth="lg">
-        {isLoading && <CircularProgress />}
+        {isLoading &&<Loader/>}
         {isError && <Alert severity="error">There is some error in fetching the message</Alert>}
         {!isLoading && !isError && !message && <Typography>Message not found</Typography>}
         {message && (
-          <Card elevation={0} variant="outlined" sx={{ mt: 2 }}>
+          <Card elevation={0}  sx={{ mt: 2 }}>
             <CardHeader
               avatar={
                 <Avatar sx={{ bgcolor: red[500] }} aria-label="author">

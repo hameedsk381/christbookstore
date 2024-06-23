@@ -7,6 +7,7 @@ import { useQuery } from 'react-query';
 import axios from 'axios';
 import { serverUrl } from '../apis/serverapi'; // Make sure this import is correct
 import { Close } from '@mui/icons-material';
+import Loader from './Loader';
 
 const BibleMessagesFeed = () => {
   const [selectedTab, setSelectedTab] = useState(0);
@@ -56,10 +57,10 @@ const BibleMessagesFeed = () => {
               </Tabs>
             )}
             <Divider sx={{ mb: 2 }} />
-            {isLoading && <CircularProgress />}
+            {isLoading && <Loader/>}
             {isError && <Alert severity="error">There is some error fetching data. Please try again.</Alert>}
             {bibleMessages && categories.length > 0 && (
-              <Grid container spacing={2}>
+              <Grid container spacing={2} mt={2}>
                 {bibleMessages
                   .filter(message => message.category === categories[selectedTab])
                   .map(message => (

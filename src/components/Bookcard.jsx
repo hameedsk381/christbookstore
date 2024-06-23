@@ -33,7 +33,7 @@ const Bookcard = ({ product }) => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
         >
-            <Card sx={{ width: {xs:'100%',md:'50%'} }}>
+            <Card sx={{ width: '100%' }}>
                 <CardActionArea>
                     <CardMedia
                         component="img"
