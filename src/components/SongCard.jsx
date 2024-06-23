@@ -6,14 +6,10 @@ import AlbumIcon from '@mui/icons-material/Album';
 import PersonIcon from '@mui/icons-material/Person';
 import TranslateIcon from '@mui/icons-material/Translate';
 
-const StyledCard = styled(Card)({
-  display: 'flex',
-  flexDirection: {xs:'column',md:'row'},
-  height: 240,width:{xs:'100%',md:'30%'}
-});
+
 
 const StyledCardMedia = styled(CardMedia)({
-  height: '100%',width:'100%'
+  height: 230
 });
 
 const StyledCardContent = styled(CardContent)({
@@ -34,8 +30,9 @@ const IconBox = styled(Box)({
 
 const SongCard = ({ song }) => {
   return (
-    <StyledCard>
-      <StyledCardMedia
+    <Card elevation={4} sx={{flexDirection:{xs:'column',md:'row'},height:{xs:420,md:230},  display: 'flex',
+    width:'100%'}}>
+      <StyledCardMedia sx={{width:{xs:'100%',md:'50%'}}}
         component="img"
         alt={song.anuvaadam}
         image={'https://images.unsplash.com/photo-1502657877623-f66bf489d236?auto=format&fit=crop&w=800'} // assuming fileUrl is the thumbnail of the song
@@ -83,13 +80,13 @@ const SongCard = ({ song }) => {
             అనువాదం: {song.anuvaadam}
           </Typography>
         </InfoBox>
-        <Box sx={{ mt: 2 }}>
+        {/* <Box sx={{ mt: 2 }}>
           <Typography variant="body2" color="text.secondary" component="div">
             <div dangerouslySetInnerHTML={{ __html: song.paata }} />
           </Typography>
-        </Box>
+        </Box> */}
       </StyledCardContent>
-    </StyledCard>
+    </Card>
   );
 };
 

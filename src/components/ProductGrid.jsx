@@ -106,10 +106,8 @@ function ProductGrid({ products, banners, categories, loading, error, songAction
       {groupedProducts && Object.keys(groupedProducts).map(category => (
         <Container key={category} sx={{ my: 4 }}>
           <Typography variant="h6" sx={{ mb: 2 }}>{category}</Typography>
-          <Box sx={{
-            display: 'flex',
+          <Grid container spacing={2} sx={{
             overflowX: 'auto',
-            gap: 2,
             py: 2,
             '&::-webkit-scrollbar': {
               display: 'none',
@@ -118,12 +116,12 @@ function ProductGrid({ products, banners, categories, loading, error, songAction
             'scrollbar-width': 'none',
           }}>
             {groupedProducts[category].map(product => (
-              <Box key={product._id} sx={{ minWidth: 250 }}>
+              <Grid item xs={12} sm={6}  key={product._id} sx={{ maxWidth: 480 }}>
                 {songs && <SongCard song={product} />}
                 {book && <BookCard product={product} />}
-              </Box>
+              </Grid>
             ))}
-          </Box>
+          </Grid>
         </Container>
       ))}
     </Container>
