@@ -1,9 +1,96 @@
-body{
-padding: 0;
+
+:root {
+    --primary-color: #0D47A1;
+    --secondary-color: #FF6F00;
+    --accent-color-1: #00ACC1;
+    --accent-color-2: #8E24AA;
+    --light-color: #FAFAFA;
+    --medium-color: #BDBDBD;
+    --dark-color: #212121;
+    --primary-text-color: #212121;
+    --secondary-text-color: #757575;
+    --background-light-color: #FFFFFF;
+    --background-dark-color: #F5F5F5;
+  }
+  
+  body {
+    background-color: var(--background-light-color);
+    color: var(--primary-text-color);
+    padding: 0;
 margin: 0;
 font-family: "Mandali", sans-serif;
 font-weight: 400;
 font-style: normal;
-}
 
+  }
   
+  .footer {
+    background-color: #1C1C1E;
+    color: #FFFFFF;
+    padding: 20px 0;
+    border-top: 1px solid #333333;
+  }
+  
+  .footer a {
+    color: #4A90E2;
+    text-decoration: none;
+  }
+  
+  .footer a:hover {
+    color: #FF6F00;
+  }
+  
+  .footer .footer-links {
+    margin-bottom: 20px;
+  }
+  
+  .footer .footer-links a {
+    margin-right: 15px;
+  }
+  
+  .footer .social-icons {
+    margin-top: 20px;
+  }
+  
+  .footer .social-icons a {
+    color: #A8A8A8;
+    margin-right: 10px;
+  }
+  
+  .footer .social-icons a:hover {
+    color: #FFFFFF;
+  }
+  
+  .footer .footer-text {
+    margin-top: 10px;
+    color: #A8A8A8;
+  }
+  
+  button {
+    background-color: var(--secondary-color);
+    color: var(--light-color);
+  }
+  
+  a {
+    color: var(--accent-color-1);
+  }
+  
+  a:hover {
+    color: var(--accent-color-2);
+  }
+  
+  .card {
+    background-color: var(--light-color);
+    border: 1px solid var(--medium-color);
+  }
+  
+  .card-title {
+    color: var(--primary-color);
+  }
+  
+  .card-text {
+    color: var(--secondary-text-color);
+  }
+  .songcard{
+    background-color: var(--light-color);
+  }

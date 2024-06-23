@@ -8,7 +8,8 @@ import { serverUrl } from '../apis/serverapi'; // Make sure this import is corre
 import Footer from './Footer';
 import { ArrowBack, ContentCopy, Facebook, Share, Twitter, Visibility, WhatsApp } from '@mui/icons-material';
 import Loader from './Loader';
-
+import ShadowDomWrapper from './ShadowDomWrapper';
+import logo1 from '../assets/logo1.jpeg'
 const SongDetails = () => {
   const { id } = useParams();
   const [song, setSong] = useState(null);
@@ -77,7 +78,16 @@ const SongDetails = () => {
 
   return (
     <>
-      <Navbar />
+ <Box
+          component="img"
+          src={logo1}
+          alt="Logo"
+          sx={{
+            ml: {xs:'5%',md:'30%'},
+            maxHeight: { xs: 100, md: 120 },
+            width: { xs: 320, md: 520 },
+          }}
+        />
       <Container maxWidth="md" sx={{ my: 3 }}>
         <Stack direction={'row'} justifyContent="space-between">
           <Button variant='contained' startIcon={<ArrowBack />} onClick={() => { navigate('/songs') }}>Go back</Button>
@@ -93,7 +103,7 @@ const SongDetails = () => {
         {isError && <Alert severity="error">There is some error in fetching the song. Please try again.</Alert>}
         {!isLoading && !isError && !song && <Typography>Song not found</Typography>}
         {song && (
-          <Card elevation={0} sx={{ mt: 2, p: 2 }}>
+          <Card elevation={0} sx={{ mt: 2, p: 2 ,bgcolor:'transparent'}}>
             <CardContent>
               <Typography variant="h4" component="div" gutterBottom sx={{ fontFamily: 'Mandali', fontWeight: 'bold' }}>
                 {song.title} <Chip size='small' label={song.category} color='secondary' sx={{ my: 1, fontFamily: 'Mandali' }} />
@@ -124,7 +134,7 @@ const SongDetails = () => {
               </Typography>
               <Divider sx={{ my: 2 }} />
               <Typography variant="body1" color="text.primary" paragraph>
-                <div dangerouslySetInnerHTML={{ __html: song.paata.replace(/\n/g, '<br />') }} style={{ fontFamily: 'Mandali', fontWeight: 'bold' }} />
+              <ShadowDomWrapper htmlContent={song.paata} />
               </Typography>
               <Drawer
                 anchor="bottom"

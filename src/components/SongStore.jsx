@@ -7,6 +7,7 @@ import axios from 'axios';
 import { offers } from '../data/offers';
 import Navbar from './Navbar';
 import SongActions from './SongActions';
+import Footer from './Footer';
 
 const SongStore = () => {
 
@@ -18,6 +19,7 @@ const { isLoading, isError, data: songs } = useQuery('songs', async () => {
   <>
   <Navbar/>
   <ProductGrid songs alphabets categories={songcategories} products={songs} banners={offers} loading={isLoading} error={isError} songActions={<SongActions/>}/>
+  <Footer/>
   </>
   )
 }

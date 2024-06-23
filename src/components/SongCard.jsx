@@ -6,6 +6,7 @@ import AlbumIcon from '@mui/icons-material/Album';
 import PersonIcon from '@mui/icons-material/Person';
 import TranslateIcon from '@mui/icons-material/Translate';
 import { useNavigate } from 'react-router-dom';
+import { ArrowOutward } from '@mui/icons-material';
 
 const StyledCardContent = styled(CardContent)({
   flexGrow: 1,
@@ -31,11 +32,14 @@ const SongCard = ({ song }) => {
   };
 
   return (
-    <Card elevation={4} variant='outlined' sx={{ flexDirection: { xs: 'column', md: 'row' }, height: 240, display: 'flex', width: '100%' }}>
-      <StyledCardContent sx={{ cursor: 'pointer' }} onClick={() => handleNavigate(song._id)}>
-        <Typography fontFamily={'Mandali'} mb={1} variant="body2" color="text.primary" fontWeight={'bold'}>
-          {song.title}
+    <Card elevation={4}  variant='outlined' sx={{ flexDirection: { xs: 'column', md: 'row' }, height: 240, display: 'flex', width: '90%' }} className='songcard'>
+      <StyledCardContent   sx={{ cursor: 'pointer' }} onClick={() => handleNavigate(song._id)}>
+       <Stack direction={'row'}>
+       <Typography fontFamily={'Mandali'} mb={1} variant="body2" color="text.primary" fontWeight={'bold'}>
+          {song.title} 
         </Typography>
+        <ArrowOutward/>
+       </Stack>
         <InfoBox>
           <IconBox>
             <AlbumIcon />

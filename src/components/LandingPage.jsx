@@ -8,7 +8,7 @@ import BlinkingComponentSwitcher from './BlinkingComponentSwitcher';
 import Hero from './Hero';
 import PromotionGrid from './PromotionGrid';
 import Footer from './Footer';
-
+import logo from '../assets/logo1.jpeg'
 const LandingPage = () => {
   const [showFab, setShowFab] = useState(true);
   const fabRef = useRef(null);
@@ -48,7 +48,7 @@ const LandingPage = () => {
       <Container maxWidth="lg">
         <Box
           component="img"
-          src="logo1.jpeg"
+          src={logo}
           alt="Logo"
           sx={{
             m: 'auto',

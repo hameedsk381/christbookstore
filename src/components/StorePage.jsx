@@ -6,6 +6,7 @@ import { useQuery } from 'react-query'
 import { offers } from '../data/offers'
 import axios from 'axios'
 import { serverUrl } from '../apis/serverapi'
+import Footer from './Footer';
 const StorePage = () => {
    // Fetch inventory items using React Query
    const { isLoading, isError, data: inventoryItems } = useQuery('inventoryItems', async () => {
@@ -17,6 +18,7 @@ const StorePage = () => {
 <>
 <Navbar cart header/>
 <ProductGrid book categories={bookcategories} products={inventoryItems} banners={offers} loading={isLoading} error={isError}/>
+<Footer/>
 </>
 
   )

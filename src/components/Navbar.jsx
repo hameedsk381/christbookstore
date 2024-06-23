@@ -8,9 +8,9 @@ import { loginSuccess, logout } from '../redux/actions/authActions';
 import CartPage from './CartPage';
 import Login from './Login';
 import SignUp from './SignUp';
-import logo from '/teluguchristianlogo.png';
+import logo from '../assets/logo2.jpeg'
 import Header from './Header';
-import SearchBar from './SearchBar'; // Import the SearchBar component
+
 
 function Navbar({cart,header}) {
     const [isCartDrawerOpen, setCartDrawerOpen] = useState(false);
@@ -62,7 +62,7 @@ function Navbar({cart,header}) {
         {header &&     <Header/>}
             <Toolbar sx={{ justifyContent: 'space-between'  }}>
                 <Typography component={Link} to={'/'} variant="h6">
-                    <Avatar variant='square' src={'logo2.jpeg'} alt="Logo" sx={{ width: 56, height: 56 }} />
+                    <Avatar variant='square' src={logo} alt="Logo" sx={{ width: 56, height: 56 }} />
                 </Typography>
                 
                {cart &&  <div>

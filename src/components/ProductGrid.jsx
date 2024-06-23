@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { Grid, Typography, Container, Stack, Chip, useMediaQuery, Box, Alert } from '@mui/material';
+import React, { useState, useRef } from 'react';
+import { Grid, Typography, Container, Stack, Chip, useMediaQuery, Box, Alert, IconButton, Button } from '@mui/material';
+import { ArrowForward } from '@mui/icons-material';
 import SearchBar from './SearchBar';
 import OffersPoster from './OffersPoster';
 import BlinkingComponentSwitcher from './BlinkingComponentSwitcher';
@@ -14,6 +15,7 @@ function ProductGrid({ products, banners, categories, loading, error, songAction
   const [checkedCategories, setCheckedCategories] = useState([]);
   const [checkedAlphabets, setCheckedAlphabets] = useState([]);
   const isMobile = useMediaQuery(theme => theme.breakpoints.down('sm'));
+  const scrollRefs = useRef({}); // Create a ref object to store references to each scrollable container
 
   const filteredProducts = products?.filter(product =>
     (checkedCategories.length === 0 || checkedCategories.includes(product.category)) &&
@@ -40,7 +42,14 @@ function ProductGrid({ products, banners, categories, loading, error, songAction
     return groups;
   }, {});
 
-  if (loading) return<Loader/>;
+  const handleScroll = (category) => {
+    const container = scrollRefs.current[category];
+    if (container) {
+      container.scrollBy({ left: 760, behavior: 'smooth' });
+    }
+  };
+
+  if (loading) return <Loader loaderSvg="/path-to-your-loader.svg" />;
   if (error) return <div>Error fetching data</div>;
 
   return (
@@ -106,25 +115,35 @@ function ProductGrid({ products, banners, categories, loading, error, songAction
       )}
       {filteredProducts.length === 0 && <Alert severity='info' color='info'>No results found for "{searchTerm ? searchTerm : checkedAlphabets}"</Alert>}
       {groupedProducts && Object.keys(groupedProducts).map(category => (
-        <Container key={category} sx={{ my: 4 }}>
-          <Typography variant="h6" sx={{ mb: 2 }}>{category}</Typography>
-          <Grid container spacing={2} sx={{
-            overflowX: 'auto',
-            py: 2,
-            '&::-webkit-scrollbar': {
-              display: 'none',
-            },
-            '-ms-overflow-style': 'none',
-            'scrollbar-width': 'none',
-          }}>
+        <Box key={category} sx={{ my: 5 }}>
+          <Stack direction="row" justifyContent="space-between" alignItems="center">
+            <Typography fontSize={{xs:'1.1rem',md:'1.5rem'}} fontWeight={'bold'} >{category}</Typography>
+            <Button size='small' endIcon={<ArrowForward />} onClick={() => handleScroll(category)}>
+              See more
+            </Button>
+          </Stack>
+          <Box
+            ref={el => (scrollRefs.current[category] = el)} // Assign the ref
+            sx={{
+              display: 'flex',
+              overflowX: 'auto',
+              gap: 2,
+              py: 2,
+              '&::-webkit-scrollbar': {
+                display: 'none',
+              },
+              '-ms-overflow-style': 'none',
+              'scrollbar-width': 'none',
+            }}
+          >
             {groupedProducts[category].map(product => (
-              <Grid item xs={12} md={4}  key={product._id} >
+              <Box key={product._id} sx={{ minWidth: 380 }}>
                 {songs && <SongCard song={product} />}
                 {book && <BookCard product={product} />}
-              </Grid>
+              </Box>
             ))}
-          </Grid>
-        </Container>
+          </Box>
+        </Box>
       ))}
     </Container>
   );

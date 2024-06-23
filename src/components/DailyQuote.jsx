@@ -18,7 +18,7 @@ mt:2,
         color: 'black',
         borderRadius: 2,
         position: 'relative',
-        overflow: 'hidden'
+        overflow: 'hidden',bgcolor:'transparent'
       }}
     >
       <Avatar

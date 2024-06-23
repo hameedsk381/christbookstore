@@ -1,10 +1,14 @@
 import React from 'react';
 import { Typography, Box, Container, Paper } from '@mui/material';
+import Navbar from './Navbar';
+import Footer from './Footer';
 
 const PrivacyPolicy = () => {
     return (
+       <>
+        <Navbar/>
         <Container component="main" maxWidth="md">
-            <Paper elevation={6} sx={{ p: 4, mt: 4, mb: 4 }}>
+            <Paper elevation={0} sx={{ p: 4, mt: 4, mb: 4,bgcolor:'transparent' }}>
                 <Typography variant="h4" gutterBottom>
                     Privacy Policy
                 </Typography>
@@ -28,6 +32,8 @@ const PrivacyPolicy = () => {
                 </Typography>
             </Paper>
         </Container>
+        <Footer/>
+       </>
     );
 };
 
