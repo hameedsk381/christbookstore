@@ -16,7 +16,7 @@ const StorePage = () => {
   return (
 <>
 <Navbar cart header/>
-<ProductGrid categories={bookcategories} products={inventoryItems} banners={offers} loading={isLoading} error={isError}/>
+<ProductGrid book categories={bookcategories} products={inventoryItems} banners={offers} loading={isLoading} error={isError}/>
 </>
 
   )

@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Container, Box, TextField, Button, Typography, Grid, Snackbar } from '@mui/material';
+import { Container, Box, TextField, Button, Typography, Grid, Snackbar, MenuItem } from '@mui/material';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import 'react-quill/dist/quill.snow.css';
 import ReactQuill from 'react-quill';
 import axios from 'axios';
 import { serverUrl } from '../apis/serverapi';
+import { songcategories } from '../data/categories';
 
 const SongUploadForm = () => {
   const [openSnackbar, setOpenSnackbar] = useState(false);
@@ -20,9 +21,11 @@ const SongUploadForm = () => {
       anuvaadam: '',
       paata: '',
       fileUrl: '',
+      category: ''
     },
     validationSchema: Yup.object({
-      paata: Yup.string().required('పాట అవసరం')
+      paata: Yup.string().required('పాట అవసరం'),
+      category: Yup.string().required('కేటగిరీ అవసరం')
     }),
     onSubmit: async (values) => {
       try {
@@ -37,7 +40,6 @@ const SongUploadForm = () => {
       }
     },
   });
-
   const handleSnackbarClose = () => {
     setOpenSnackbar(false);
   };
@@ -47,10 +49,10 @@ const SongUploadForm = () => {
       <Box
         component="form"
         onSubmit={formik.handleSubmit}
-        sx={{ mt: 4, p: 4, border: '1px solid #ddd', borderRadius: '8px' }}
+        sx={{ mt: 2, p: 4, border: '1px solid #ddd', borderRadius: '8px' }}
       >
-        <Typography variant="h5" component="div" gutterBottom>
-          పాటను అప్లోడ్ చేయండి
+        <Typography mb={2} textTransform={'uppercase'} textAlign={'center'} variant="h4" component="h5" gutterBottom>
+        Song Upload Form
         </Typography>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
@@ -136,8 +138,28 @@ const SongUploadForm = () => {
             />
           </Grid>
           <Grid item xs={12}>
+            <TextField
+              select
+              fullWidth
+              id="category"
+              name="category"
+              label="కేటగిరీ"
+              value={formik.values.category}
+              onChange={formik.handleChange}
+              error={formik.touched.category && Boolean(formik.errors.category)}
+              helperText={formik.touched.category && formik.errors.category}
+              variant="outlined"
+            >
+              {songcategories.map((option) => (
+                <MenuItem key={option} value={option}>
+                  {option}
+                </MenuItem>
+              ))}
+            </TextField>
+          </Grid>
+          <Grid item xs={12}>
             <Button color="primary" variant="contained" fullWidth type="submit">
-              సమర్పించు
+              Submit
             </Button>
           </Grid>
         </Grid>

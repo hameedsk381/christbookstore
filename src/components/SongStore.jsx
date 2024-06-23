@@ -9,16 +9,15 @@ import Navbar from './Navbar';
 import SongActions from './SongActions';
 
 const SongStore = () => {
-       // Fetch inventory items using React Query
-   const { isLoading, isError, data: inventoryItems } = useQuery('inventoryItems', async () => {
-    const response = await axios.get(`${serverUrl}/api/inventory`);
-    return response.data;
-});
 
+const { isLoading, isError, data: songs } = useQuery('songs', async () => {
+  const response = await axios.get(`${serverUrl}/songs`);
+  return response.data;
+});
   return (
   <>
   <Navbar/>
-  <ProductGrid alphabets categories={songcategories} products={inventoryItems} banners={offers} loading={isLoading} error={isError} songActions={<SongActions/>}/>
+  <ProductGrid songs alphabets categories={songcategories} products={songs} banners={offers} loading={isLoading} error={isError} songActions={<SongActions/>}/>
   </>
   )
 }

@@ -4,8 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../redux/actions/cartActions';
 import { Add, Remove, ShoppingBag } from '@mui/icons-material';
 import { motion } from 'framer-motion';
+import SongCard from './SongCard';
 
-const ProductCard = ({ product }) => {
+const Bookcard = ({ product }) => {
     const dispatch = useDispatch();
     const [quantity, setQuantity] = useState(1);
     const cartItems = useSelector(state => state.cart.items);
@@ -78,8 +79,9 @@ const ProductCard = ({ product }) => {
                     </Button>
                 </CardActions>
             </Card>
+           
         </motion.div>
     );
 };
 
-export default ProductCard;
+export default Bookcard;

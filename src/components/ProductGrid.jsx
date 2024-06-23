@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Grid, Typography, Container, Stack, Chip, useMediaQuery, Box } from '@mui/material';
-import ProductCard from './ProductCard';
 import { useQuery } from 'react-query';
 import axios from 'axios';
 import { serverUrl } from '../apis/serverapi';
@@ -11,8 +10,10 @@ import { offers } from '../data/offers';
 
 import MediaCover from './MediaCover';
 import { teluguAlphabets } from '../data/alphabets';
+import SongCard from './SongCard';
+import Bookcard from './Bookcard';
 
-function ProductGrid({products,banners,categories,loading,error,songActions,alphabets}) {
+function ProductGrid({products,banners,categories,loading,error,songActions,alphabets ,songs,book}) {
     const [searchTerm, setSearchTerm] = useState('');
     const [checkedCategories, setCheckedCategories] = useState([]);
     const [checkedAlphabets, setCheckedAlphabets] = useState([]);
@@ -136,7 +137,8 @@ function ProductGrid({products,banners,categories,loading,error,songActions,alph
                     }}>
                         {groupedProducts[category].map(product => (
                             <Box key={product._id} sx={{ minWidth: 250 }}>
-                                <ProductCard product={product} />
+                              {songs &&   <SongCard song={product}  />}
+                              {book &&   <Bookcard product={product}  />}
                             </Box>
                         ))}
                     </Box>
