@@ -21,7 +21,7 @@ const SongUploadForm = () => {
       anuvaadam: '',
       paata: '',
       fileUrl: '',
-      category: '',title:'',songNum
+      category: '',title:'',songNum:''
     },
     validationSchema: Yup.object({
       paata: Yup.string().required('పాట అవసరం'),
