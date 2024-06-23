@@ -1,57 +1,54 @@
 export const bibleMessages = [
-    {
-      id: 1,
-      category: 'Sunday school',
-      title: 'The Lord is my Shepherd',
-      author: 'John Doe',
-      date: 'June 22, 2024',
-      imageUrl: 'https://images.unsplash.com/photo-1502657877623-f66bf489d236?auto=format&fit=crop&w=800',
-      content: 'The Lord is my shepherd; I shall not want. He makes me lie down in green pastures. He leads me beside still waters. He restores my soul. He leads me in paths of righteousness for his name\'s sake.',
-    },
-    {
-        id: 4,
-        category: 'Native sermons',
-        title: 'The Lord is my Shepherd fvs',
-        author: 'John Dsdfsdfdsoe',
-        date: 'June 22, 2024',
-        imageUrl: 'https://images.unsplash.com/photo-1502657877623-f66bf489d236?auto=format&fit=crop&w=800',
-        content: 'The Lord is my sdsdsvdsvsdvhepherd; I shall not want. He makes me lie down in green pastures. He leads me beside still waters. He restores my soul. He leads me in paths of righteousness for his name\'s sake.',
-      },{
-        id: 5,
-        category: 'Textual sermons',
-        title: 'The Lord is my Shepherd',
-        author: 'John Doe',
-        date: 'June 22, 2024',
-        imageUrl: 'https://images.unsplash.com/photo-1502657877623-f66bf489d236?auto=format&fit=crop&w=800',
-        content: 'The Lord is my shepherd; I shall not want. He makes me lie down in green pastures. He leads me beside still waters. He restores my soul. He leads me in paths of righteousness for his name\'s sake.',
-      },
-    {
-      id: 2,
-      category: 'Expository sermons',
-      title: 'I am the way and the truth and the life',
-      author: 'Jane Smith',
-      date: 'June 21, 2024',
-      imageUrl: 'https://images.unsplash.com/photo-1502657877623-f66bf489d236?auto=format&fit=crop&w=800',
-      content: 'Jesus answered, "I am the way and the truth and the life. No one comes to the Father except through me."',
-    },
-    {
-      id: 3,
-      category: 'Topical sermons',
-      title: 'For I know the plans I have for you',
-      author: 'Paul Johnson',
-      date: 'June 20, 2024',
-      imageUrl: 'https://images.unsplash.com/photo-1502657877623-f66bf489d236?auto=format&fit=crop&w=800',
-      content: 'For I know the plans I have for you, declares the Lord, plans for welfare and not for evil, to give you a future and a hope.',
-    },{
-        id: 6,
-        category: 'Jokes',
-        title: 'For I know the xcvxvxplans I have for you',
-        author: 'Paul Johnson vxc',
-        date: 'June 20, 2024',
-        imageUrl: 'https://images.unsplash.com/photo-1502657877623-f66bf489d236?auto=format&fit=crop&w=800',
-        content: 'For I know the pvzxvxzlans I have for you, declares the Lord, plans for welfare and not for evil, to give you a future and a hope.',
-      }
-  ];
+  {
+    id: 1,
+    heading1: 'God’s Love',
+    heading2: 'Understanding the Depth',
+    writer: 'John Doe',
+    imageUrl: 'https://c4.wallpaperflare.com/wallpaper/86/419/788/random-green-hd-wallpaper-preview.jpg',
+    description: 'This message explores the depth of God’s love. lorem John Doe is a pastor and author with over 20 years of experience in ministry. He has written several books on faith and spirituality. John Doe is a pastor and author with over 20 years of experience in ministry. He has written several books on faith and spirituality. John Doe is a pastor and author with over 20 years of experience in ministry. He has written several books on faith and spirituality.',
+    aboutAuthor: 'John Doe is a pastor and author with over 20 years of experience in ministry. He has written several books on faith and spirituality.',
+    category: 'Love'
+  },{
+    id: 8,
+    heading1: 'God’s Love',
+    heading2: 'Understanding the Depth',
+    writer: 'John Doe',
+    author: 'John Doe',
+    date: '2023-06-25',
+    imageUrl: 'https://c4.wallpaperflare.com/wallpaper/86/419/788/random-green-hd-wallpaper-preview.jpg',
+    description: 'This message explores the depth of God’s love. lorem John Doe is a pastor and author with over 20 years of experience in ministry. He has written several books on faith and spirituality. John Doe is a pastor and author with over 20 years of experience in ministry. He has written several books on faith and spirituality. John Doe is a pastor and author with over 20 years of experience in ministry. He has written several books on faith and spirituality.',
+    content: 'For God so loved the world that He gave His one and only Son, that whoever believes in Him shall not perish but have eternal life.',
+    aboutAuthor: 'John Doe is a pastor and author with over 20 years of experience in ministry. He has written several books on faith and spirituality.',
+    category: 'Love'
+  },
+  {
+    id: 2,
+    heading1: 'Faith and Patience',
+    heading2: 'The Keys to Victory',
+    writer: 'Jane Smith',
+    author: 'Jane Smith',
+    date: '2023-07-01',
+    imageUrl: 'https://c4.wallpaperflare.com/wallpaper/86/419/788/random-green-hd-wallpaper-preview.jpg',
+    description: 'Discover how faith and patience work together to bring victory in life.',
+    content: 'Consider it pure joy, my brothers and sisters, whenever you face trials of many kinds, because you know that the testing of your faith produces perseverance.',
+    aboutAuthor: 'Jane Smith is a motivational speaker and author known for her inspiring messages on faith and perseverance. She travels the world sharing her insights.',
+    category: 'Faith'
+  },
+  {
+    id: 3,
+    heading1: 'Walking in Peace',
+    heading2: 'Living a Life of Serenity',
+    writer: 'Michael Johnson',
+    author: 'Michael Johnson',
+    date: '2023-08-10',
+    imageUrl: 'https://c4.wallpaperflare.com/wallpaper/86/419/788/random-green-hd-wallpaper-preview.jpg',
+    description: 'Learn how to walk in peace and live a life of serenity amidst the chaos.',
+    content: 'Peace I leave with you; my peace I give you. I do not give to you as the world gives. Do not let your hearts be troubled and do not be afraid.',
+    aboutAuthor: 'Michael Johnson is a theologian and author who specializes in topics related to peace and spiritual growth. He has authored several bestselling books.',
+    category: 'Peace'
+  },
+];
+
   export const famousMessages = [
     'The Lord is my Shepherd',
     'I am the way and the truth and the life',

@@ -24,6 +24,7 @@ import Orders from './Orders';
 import SongsPanel from './SongsPanel';
 import { useDispatch, useSelector } from 'react-redux';
 import api from '../apis/api';
+import Messages from './Messages';
 
 const drawerWidth = 240;
 
@@ -78,6 +79,7 @@ function Admin() {
         <Tab label="Inventory" />
         <Tab label="Orders" />
         <Tab label="Songs" />
+        <Tab label="Bible Messages" />
       </Tabs>
     </Box>
   );
@@ -142,6 +144,7 @@ function Admin() {
         {selectedTab === 1 && <Inventory />}
         {selectedTab === 2 && <Orders />}
         {selectedTab === 3 && <SongsPanel />}
+        {selectedTab === 4 && <Messages/> }
       </Box>
     </Box>
   );

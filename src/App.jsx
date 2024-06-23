@@ -17,6 +17,8 @@ import LandingPage from './components/LandingPage';
 import SongStore from './components/SongStore';
 import BibleMessagesFeed from './components/BibleMessagesFeed'
 import WordForTheDay from './components/WordForTheDay'
+import MessageComp from './components/MessageComp';
+import SongDetails from './components/SongDetails';
 const ScrollToTop = () => {
   const location = useLocation(); // This hook returns the location object that represents the current URL.
 
@@ -49,6 +51,8 @@ const App = () => {
   <Route exact path="/word-for-the-day" element={<WordForTheDay />} />
   <Route exact path="/product-details/:id" element={<ProductDetailsPage />} />
   <Route exact path="/checkout" element={<CheckoutPage />} />
+  <Route path="/message/:id" element={<MessageComp />} />
+  <Route path="/songs/:id" element={<SongDetails />} />
   <Route path="/admin" element={<Admin/>} />
   <Route path='/profile' element={<Profile/>}/>
 <Route exact path="/about" element={<AboutUs />} />
