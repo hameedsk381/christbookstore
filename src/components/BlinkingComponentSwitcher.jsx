@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect  } from 'react';
 
 const BlinkingComponentSwitcher = ({ components, blinkDuration = 200, displayDuration = 3000 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);

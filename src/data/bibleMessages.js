@@ -1,7 +1,7 @@
 export const bibleMessages = [
     {
       id: 1,
-      category: 'Faith',
+      category: 'Sunday school',
       title: 'The Lord is my Shepherd',
       author: 'John Doe',
       date: 'June 22, 2024',
@@ -10,7 +10,7 @@ export const bibleMessages = [
     },
     {
         id: 4,
-        category: 'Faith',
+        category: 'Native sermons',
         title: 'The Lord is my Shepherd fvs',
         author: 'John Dsdfsdfdsoe',
         date: 'June 22, 2024',
@@ -18,7 +18,7 @@ export const bibleMessages = [
         content: 'The Lord is my sdsdsvdsvsdvhepherd; I shall not want. He makes me lie down in green pastures. He leads me beside still waters. He restores my soul. He leads me in paths of righteousness for his name\'s sake.',
       },{
         id: 5,
-        category: 'Hope',
+        category: 'Textual sermons',
         title: 'The Lord is my Shepherd',
         author: 'John Doe',
         date: 'June 22, 2024',
@@ -27,7 +27,7 @@ export const bibleMessages = [
       },
     {
       id: 2,
-      category: 'Hope',
+      category: 'Expository sermons',
       title: 'I am the way and the truth and the life',
       author: 'Jane Smith',
       date: 'June 21, 2024',
@@ -36,7 +36,7 @@ export const bibleMessages = [
     },
     {
       id: 3,
-      category: 'Love',
+      category: 'Topical sermons',
       title: 'For I know the plans I have for you',
       author: 'Paul Johnson',
       date: 'June 20, 2024',
@@ -44,7 +44,7 @@ export const bibleMessages = [
       content: 'For I know the plans I have for you, declares the Lord, plans for welfare and not for evil, to give you a future and a hope.',
     },{
         id: 6,
-        category: 'Love',
+        category: 'Jokes',
         title: 'For I know the xcvxvxplans I have for you',
         author: 'Paul Johnson vxc',
         date: 'June 20, 2024',

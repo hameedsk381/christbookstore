@@ -2,9 +2,10 @@ import React from 'react';
 import { Box, Grid, Typography,  Container } from '@mui/material';
 import { Link } from 'react-router-dom';
 
-function Footer() {
+function Footer({noFooter}) {
     return (
-        <Box component="footer" sx={{ bgcolor: 'secondary.main', py: 6 }}>
+       <>
+       {!noFooter &&  <Box component="footer" sx={{ bgcolor: 'secondary.main', py: 6 }}>
             <Container maxWidth="lg" sx={{color:'whitesmoke'}}>
                 <Grid container spacing={4}>
                     <Grid item xs={12} sm={4}>
@@ -46,7 +47,8 @@ function Footer() {
                     </Grid>
                 </Grid>
             </Container>
-        </Box>
+        </Box>}
+       </>
     );
 }
 

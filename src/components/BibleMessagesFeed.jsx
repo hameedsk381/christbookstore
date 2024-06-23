@@ -111,13 +111,7 @@ const BibleMessagesFeed = () => {
       <Dialog open={isModalOpen} onClose={handleClose} fullWidth maxWidth="md">
         <DialogTitle>
           {selectedMessage?.title}
-          <IconButton
-            aria-label="close"
-            onClick={handleClose}
-            sx={{ position: 'absolute', right: 8, top: 8 }}
-          >
-            <Close />
-          </IconButton>
+         
         </DialogTitle>
         <DialogContent dividers>
           {selectedMessage?.imageUrl && (

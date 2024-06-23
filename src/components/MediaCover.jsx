@@ -2,13 +2,13 @@ import { Card, CardContent, CardMedia, Typography, CardActionArea } from '@mui/m
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export default function MediaCover({ imageUrl, navigateTo, icon, title }) {
+export default function MediaCover({ imageUrl, navigateTo, icon, title ,width ,cardheight }) {
   const navigate = useNavigate();
   return (
     <Card 
       variant='elevation' 
       sx={{ 
-        py: 3, width:'100%',
+        py: 3, width:`${width}`,
         position: 'relative', 
         overflow: 'hidden', 
         '&:hover': {

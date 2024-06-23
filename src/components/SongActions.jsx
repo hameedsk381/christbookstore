@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Stack, Button, Drawer, Box, Typography, TextField, Container, Dialog, DialogTitle, DialogContent, DialogActions, IconButton, useMediaQuery } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
+import { Close } from '@mui/icons-material';
 
 const SongActions = () => {
   const [isRequestDrawerOpen, setRequestDrawerOpen] = useState(false);
@@ -33,7 +34,7 @@ const SongActions = () => {
   };
 
   const renderForm = (title, isRequest) => (
-    <>
+    <Box mt={{xs:8,md:0}}>
      
       <TextField
         fullWidth
@@ -75,7 +76,7 @@ const SongActions = () => {
       <Button fullWidth variant="contained" color={isRequest ? "primary" : "secondary"} >
         {isRequest ? "Submit Request" : "Submit Song"}
       </Button>
-    </>
+    </Box>
   );
 
   return (
@@ -92,17 +93,17 @@ const SongActions = () => {
       {/* Drawer for small screens */}
       <Drawer anchor="right" open={isRequestDrawerOpen} onClose={toggleRequestDrawer(false)}>
         <Box sx={{ width: '100%', height: '100%', p: 2, position: 'relative' }}>
-          <IconButton onClick={handleClose} sx={{ position: 'absolute', top: 16, right: 16 }}>
-            <CloseIcon />
-          </IconButton>
+          <Button variant='contained' onClick={handleClose} sx={{ position: 'absolute', top: 16, right: 16 }} startIcon={<Close/>}>
+            Close
+          </Button>
           {renderForm('Request a Song', true)}
         </Box>
       </Drawer>
       <Drawer anchor="right" open={isPostDrawerOpen} onClose={togglePostDrawer(false)}>
         <Box sx={{ width: '100%', height: '100%', p: 2, position: 'relative' }}>
-          <IconButton onClick={handleClose} sx={{ position: 'absolute', top: 16, right: 16 }}>
-            <CloseIcon />
-          </IconButton>
+        <Button variant='contained' onClick={handleClose} sx={{ position: 'absolute', top: 16, right: 16 }} startIcon={<Close/>}>
+            Close
+          </Button>
           {renderForm('Post a Song', false)}
         </Box>
       </Drawer>

@@ -6,6 +6,8 @@ import MediaCover from './MediaCover';
 import DailyQuote from './DailyQuote';
 import BlinkingComponentSwitcher from './BlinkingComponentSwitcher';
 import Hero from './Hero';
+import PromotionGrid from './PromotionGrid';
+import Footer from './Footer';
 
 const LandingPage = () => {
   const [showFab, setShowFab] = useState(true);
@@ -38,7 +40,7 @@ const LandingPage = () => {
       sx={{
         width: '100%',
         color: 'black',
-        pb: { xs: 4, md: 6 },
+     
         pt: { xs: 2, md: 4 },
         textAlign: 'center',
       }}
@@ -55,21 +57,7 @@ const LandingPage = () => {
           }}
         />
         <DailyQuote />
-        <Box sx={{ pb: 4, height: 240 }}>
-          <BlinkingComponentSwitcher
-            components={[
-              <MediaCover
-                imageUrl="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=800"
-              />,
-              <MediaCover
-                imageUrl="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=800"
-              />,
-              <MediaCover
-                imageUrl="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=800"
-              />,
-            ]}
-          />
-        </Box>
+       <PromotionGrid/>
         <Hero />
 
         <Grid
@@ -123,6 +111,7 @@ const LandingPage = () => {
           </Fab>
         )}
       </Container>
+      <Footer/>
     </Box>
   );
 };
