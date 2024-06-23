@@ -1,15 +1,17 @@
 import React from 'react';
-import { Card, CardMedia, CardContent, Typography, Box } from '@mui/material';
+import { Card, CardMedia, CardContent, Typography, Box, CardActions, Button, IconButton, Stack } from '@mui/material';
 import { styled } from '@mui/system';
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import AlbumIcon from '@mui/icons-material/Album';
 import PersonIcon from '@mui/icons-material/Person';
 import TranslateIcon from '@mui/icons-material/Translate';
+import { useNavigate } from 'react-router-dom';
+import { PlayArrow, Share, Visibility } from '@mui/icons-material';
 
 
 
 const StyledCardMedia = styled(CardMedia)({
-  height: 230
+  height: 260
 });
 
 const StyledCardContent = styled(CardContent)({
@@ -29,17 +31,20 @@ const IconBox = styled(Box)({
 });
 
 const SongCard = ({ song }) => {
+    const navigate = useNavigate();
   return (
-    <Card elevation={4} sx={{flexDirection:{xs:'column',md:'row'},height:{xs:420,md:230},  display: 'flex',
-    width:'100%'}}>
-      <StyledCardMedia sx={{width:{xs:'100%',md:'50%'}}}
+    <Card elevation={4} sx={{flexDirection:{xs:'column',md:'row'},height:{xs:480,md:260},  display: 'flex',
+    width:'100%'}}  >
+      <StyledCardMedia sx={{width:'100%'}}
         component="img"
         alt={song.anuvaadam}
-        image={'https://images.unsplash.com/photo-1502657877623-f66bf489d236?auto=format&fit=crop&w=800'} // assuming fileUrl is the thumbnail of the song
+        image={'https://c4.wallpaperflare.com/wallpaper/86/419/788/random-green-hd-wallpaper-preview.jpg'} // assuming fileUrl is the thumbnail of the song
         title={song.anuvaadam}
       />
-      <StyledCardContent>
-      
+      <StyledCardContent sx={{cursor:'pointer'}} >
+      <Typography mb={1} variant="body2" color="text.primary">
+            {song.title}
+          </Typography>
         <InfoBox>
           <IconBox>
             <AlbumIcon />
@@ -85,7 +90,16 @@ const SongCard = ({ song }) => {
             <div dangerouslySetInnerHTML={{ __html: song.paata }} />
           </Typography>
         </Box> */}
+        <Stack direction={'row'} justifyContent={'space-around'}>
+        <Button startIcon={<Visibility/>} size='small' onClick={()=>{navigate(`/songs/${song._id}`)}}>
+            view
+        </Button>
+        <Button size='small' startIcon={<Share/>} onClick={()=>{navigate(`/songs/${song._id}`)}}>
+            share
+        </Button>
+        </Stack>
       </StyledCardContent>
+      
     </Card>
   );
 };

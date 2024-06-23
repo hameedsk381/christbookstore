@@ -103,7 +103,7 @@ function ProductGrid({ products, banners, categories, loading, error, songAction
           ))}
         </Stack>
       )}
-      {filteredProducts.length === 0 && <Alert severity='info' color='info'>No products found for "{searchTerm ? searchTerm : checkedAlphabets}"</Alert>}
+      {filteredProducts.length === 0 && <Alert severity='info' color='info'>No results found for "{searchTerm ? searchTerm : checkedAlphabets}"</Alert>}
       {groupedProducts && Object.keys(groupedProducts).map(category => (
         <Container key={category} sx={{ my: 4 }}>
           <Typography variant="h6" sx={{ mb: 2 }}>{category}</Typography>
@@ -117,7 +117,7 @@ function ProductGrid({ products, banners, categories, loading, error, songAction
             'scrollbar-width': 'none',
           }}>
             {groupedProducts[category].map(product => (
-              <Grid item xs={12} sm={6}  key={product._id} sx={{ maxWidth: 480 }}>
+              <Grid item xs={12} sm={6}  key={product._id} sx={{ maxWidth: 500 }}>
                 {songs && <SongCard song={product} />}
                 {book && <BookCard product={product} />}
               </Grid>
