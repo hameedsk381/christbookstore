@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { Container, Box, TextField, Button, Typography, Grid, Snackbar, MenuItem } from '@mui/material';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import 'react-quill/dist/quill.snow.css';
-import ReactQuill from 'react-quill';
 import axios from 'axios';
 import { serverUrl } from '../apis/serverapi';
 import { songcategories } from '../data/categories';
@@ -21,12 +19,15 @@ const SongUploadForm = () => {
       anuvaadam: '',
       paata: '',
       fileUrl: '',
-      category: '',title:'',songNum:''
+      category: '',
+      title: '',
+      songNum: ''
     },
     validationSchema: Yup.object({
       paata: Yup.string().required('పాట అవసరం'),
       category: Yup.string().required('కేటగిరీ అవసరం'),
-      title:Yup.string().required('Please give the title'),songNum:Yup.string().required('Please give song Num')
+      title: Yup.string().required('Please give the title'),
+      songNum: Yup.string().required('Please give song Num')
     }),
     onSubmit: async (values) => {
       try {
@@ -41,6 +42,7 @@ const SongUploadForm = () => {
       }
     },
   });
+
   const handleSnackbarClose = () => {
     setOpenSnackbar(false);
   };
@@ -53,15 +55,15 @@ const SongUploadForm = () => {
         sx={{ mt: 2, p: 4, border: '1px solid #ddd', borderRadius: '8px' }}
       >
         <Typography mb={2} textTransform={'uppercase'} textAlign={'center'} variant="h4" component="h5" gutterBottom>
-        Song Upload Form
+          Song Upload Form
         </Typography>
         <Grid container spacing={2}>
-        <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
               id="title"
               name="title"
-              label="title"
+              label="Title"
               value={formik.values.title}
               onChange={formik.handleChange}
               variant="outlined"
@@ -76,7 +78,7 @@ const SongUploadForm = () => {
               value={formik.values.songNum}
               onChange={formik.handleChange}
               variant="outlined"
-              type='number'
+              type="number"
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -135,19 +137,19 @@ const SongUploadForm = () => {
             />
           </Grid>
           <Grid item xs={12}>
-            <ReactQuill
-              theme="snow"
+            <TextField
+              fullWidth
               id="paata"
               name="paata"
+              label="పాట"
               value={formik.values.paata}
-              onChange={(content) => formik.setFieldValue('paata', content)}
-              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
+              variant="outlined"
+              multiline
+              rows={6}
+              error={formik.touched.paata && Boolean(formik.errors.paata)}
+              helperText={formik.touched.paata && formik.errors.paata}
             />
-            {formik.touched.paata && formik.errors.paata && (
-              <Typography color="error" variant="body2">
-                {formik.errors.paata}
-              </Typography>
-            )}
           </Grid>
           <Grid item xs={12}>
             <TextField
@@ -157,7 +159,6 @@ const SongUploadForm = () => {
               label="పాట URL"
               value={formik.values.fileUrl}
               onChange={formik.handleChange}
-  
               variant="outlined"
             />
           </Grid>
