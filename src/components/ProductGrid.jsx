@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Grid, Typography, Container, Stack, Chip, useMediaQuery, Box } from '@mui/material';
+import { Grid, Typography, Container, Stack, Chip, useMediaQuery, Box, Alert } from '@mui/material';
 import SearchBar from './SearchBar';
 import OffersPoster from './OffersPoster';
 import BlinkingComponentSwitcher from './BlinkingComponentSwitcher';
@@ -16,7 +16,7 @@ function ProductGrid({ products, banners, categories, loading, error, songAction
 
   const filteredProducts = products?.filter(product =>
     (checkedCategories.length === 0 || checkedCategories.includes(product.category)) &&
-    (checkedAlphabets.length === 0 || checkedAlphabets.some(alphabet => product.title.includes(alphabet))) &&
+    (checkedAlphabets.length === 0 || checkedAlphabets.some(alphabet => product.title.startsWith(alphabet))) &&
     Object.values(product).some(field =>
       typeof field === 'string' && field.toLowerCase().includes(searchTerm.toLowerCase())
     )
@@ -103,6 +103,7 @@ function ProductGrid({ products, banners, categories, loading, error, songAction
           ))}
         </Stack>
       )}
+      {filteredProducts.length === 0 && <Alert severity='info' color='info'>No products found for "{searchTerm ? searchTerm : checkedAlphabets}"</Alert>}
       {groupedProducts && Object.keys(groupedProducts).map(category => (
         <Container key={category} sx={{ my: 4 }}>
           <Typography variant="h6" sx={{ mb: 2 }}>{category}</Typography>
