@@ -156,7 +156,7 @@ function ProductGrid({ products, banners, categories, loading, error, songAction
             flexDirection={searchTerm !== '' && 'row-reverse'}
           >
             {groupedProducts[category].map(product => (
-              <Box key={product._id} sx={{ minWidth: 360 }}>
+              <Box key={product._id} sx={{ minWidth: 380 }}>
                 {songs && <SongCard song={product} />}
                 {book && <BookCard product={product} />}
               </Box>
