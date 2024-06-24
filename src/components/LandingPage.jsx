@@ -1,17 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Box, Typography, Button, Grid, Container, IconButton, Paper, Avatar, Card, CardActionArea, CardContent, CardMedia, Stack, Fab } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+
 import { ArrowDownward, BookOutlined, LocalLibraryOutlined, MusicNoteOutlined, StoreOutlined } from '@mui/icons-material';
 import MediaCover from './MediaCover';
 import DailyQuote from './DailyQuote';
-import BlinkingComponentSwitcher from './BlinkingComponentSwitcher';
+
 import Hero from './Hero';
 import PromotionGrid from './PromotionGrid';
 import Footer from './Footer';
 import logo from '../assets/logo1.jpeg'
 const LandingPage = () => {
   const [showFab, setShowFab] = useState(true);
-  const fabRef = useRef(null);
+  
 
   const handleScroll = () => {
     if (window.scrollY > 100) {

@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { registerUser } from '../redux/actions/registerActions';
 import { validateCredentials } from '../utils/formValdation';
 import { serverUrl } from '../apis/serverapi';
-
+import logo from '../assets/logo2.jpeg'
 
 function SignUp({handleSignup}) {
     const [userDetails, setUserDetails] = useState({
@@ -68,7 +68,7 @@ setLoading(true);
     return (
         <Container component="main" maxWidth="xs">
             <Box sx={{ marginTop: 8, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <Avatar variant='square' src={'logo2.jpeg'} alt="Logo" sx={{ width: 56, height: 56 }} />
+            <Avatar variant='square' src={logo} alt="Logo" sx={{ width: 56, height: 56 }} />
                 <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
                     <TextField
                         margin="normal"

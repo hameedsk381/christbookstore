@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Box, TextField, Button, Typography, Container, CircularProgress, Alert, Avatar } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearLoginError, loginUser } from '../redux/actions/authActions';
-
+import logo from '../assets/logo2.jpeg'
 function Login({handleLogin}) {
     const [credentials, setCredentials] = useState({ email: '', password: '' });
     const { loading, error, isLoggedIn } = useSelector(state => ({
@@ -37,7 +37,7 @@ function Login({handleLogin}) {
     return (
         <Container component="main" maxWidth="xs">
             <Box sx={{ marginTop: 8, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <Avatar variant='square' src={'logo2.jpeg'} alt="Logo" sx={{ width: 56, height: 56 }} />
+            <Avatar variant='square' src={logo} alt="Logo" sx={{ width: 56, height: 56 }} />
                 {error && <Alert severity="error" sx={{ width: '100%', mt: 2 }}>{error}</Alert>}
                 <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
                     <TextField

@@ -25,7 +25,8 @@ import SongsPanel from './SongsPanel';
 import { useDispatch, useSelector } from 'react-redux';
 import api from '../apis/api';
 import Messages from './Messages';
-
+import WordDataGrid from './WordDataGrid';
+import logo from '../assets/logo2.jpeg'
 const drawerWidth = 240;
 
 function Admin() {
@@ -80,6 +81,7 @@ function Admin() {
         <Tab label="Orders" />
         <Tab label="Songs" />
         <Tab label="Bible Messages" />
+        <Tab label="Word for the day " />
       </Tabs>
     </Box>
   );
@@ -98,10 +100,9 @@ function Admin() {
           >
             <MenuIcon />
           </IconButton>
-          <Avatar variant='square' src={'logo2.jpeg'} alt="Logo" sx={{ width: 56, height: 56 }} />
-          <Typography variant="h6" noWrap component="div">
-            
-            Bookstore Admin Panel
+          <Avatar variant='square' src={logo} alt="Logo" sx={{ width: 56, height: 56 }} />
+          <Typography  sx={{ mx: 4, flexGrow: 1 }}>
+            The Telugu Christian Admin Panel
           </Typography>
         </Toolbar>
       </AppBar>
@@ -145,6 +146,7 @@ function Admin() {
         {selectedTab === 2 && <Orders />}
         {selectedTab === 3 && <SongsPanel />}
         {selectedTab === 4 && <Messages/> }
+        {selectedTab === 5 && <WordDataGrid/> }
       </Box>
     </Box>
   );
