@@ -15,15 +15,33 @@ function ProductGrid({ products, banners, categories, loading, error, songAction
   const [checkedCategories, setCheckedCategories] = useState([]);
   const [checkedAlphabets, setCheckedAlphabets] = useState([]);
   const isMobile = useMediaQuery(theme => theme.breakpoints.down('sm'));
-  const scrollRefs = useRef({}); // Create a ref object to store references to each scrollable container
+  const scrollRefs = useRef({});
 
-  const filteredProducts = products?.filter(product =>
-    (checkedCategories.length === 0 || checkedCategories.includes(product.category)) &&
-    (checkedAlphabets.length === 0 || checkedAlphabets.some(alphabet => product.title.startsWith(alphabet))) &&
-    Object.values(product).some(field =>
-      typeof field === 'string' && field.toLowerCase().includes(searchTerm.toLowerCase())
-    )
-  );
+  const isNumberSearch = !isNaN(searchTerm);
+
+  const filteredProducts = products?.filter(product => {
+    const searchTermLower = searchTerm.toLowerCase();
+    const searchTermNumber = parseInt(searchTerm, 10);
+
+    const matchesCategory = checkedCategories.length === 0 || checkedCategories.includes(product.category);
+    const matchesAlphabet = checkedAlphabets.length === 0 || checkedAlphabets.some(alphabet => product.title.startsWith(alphabet));
+
+    const matchesStringField = Object.values(product).some(field =>
+      typeof field === 'string' && field.toLowerCase().includes(searchTermLower)
+    );
+
+    const matchesNumberField = Object.values(product).some(field =>
+      typeof field === 'number' && field.toString().includes(searchTerm)
+    );
+
+    const matchesSongNum = product.songNum === searchTermNumber;
+
+    const matchesSearchTerm = isNumberSearch
+      ? matchesSongNum || matchesStringField || matchesNumberField
+      : matchesStringField;
+
+    return matchesCategory && matchesAlphabet && matchesSearchTerm;
+  });
 
   const handleCategoryChange = (category) => {
     setCheckedCategories(prev => prev.includes(category) ? prev.filter(c => c !== category) : [...prev, category]);
@@ -118,9 +136,9 @@ function ProductGrid({ products, banners, categories, loading, error, songAction
         <Box key={category} sx={{ my: 5 }}>
           <Stack direction="row" justifyContent="space-between" alignItems="center">
             <Typography fontSize={{xs:'1.1rem',md:'1.5rem'}} fontWeight={'bold'} >{category}</Typography>
-            <Button size='small' endIcon={<ArrowForward />} onClick={() => handleScroll(category)}>
+            {searchTerm === '' && <Button size='small' endIcon={<ArrowForward />} onClick={() => handleScroll(category)}>
               See more
-            </Button>
+            </Button>}
           </Stack>
           <Box
             ref={el => (scrollRefs.current[category] = el)} // Assign the ref
@@ -135,6 +153,7 @@ function ProductGrid({ products, banners, categories, loading, error, songAction
               '-ms-overflow-style': 'none',
               'scrollbar-width': 'none',
             }}
+            flexDirection={searchTerm !== '' && 'row-reverse'}
           >
             {groupedProducts[category].map(product => (
               <Box key={product._id} sx={{ minWidth: 380 }}>

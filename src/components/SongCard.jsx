@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, CardMedia, CardContent, Typography, Box, Button, IconButton, Stack, Drawer, List, ListItem, ListItemText, ListItemIcon, Snackbar } from '@mui/material';
+import { Card, CardMedia, CardContent, Typography, Box, Button, IconButton, Stack, Drawer, List, ListItem, ListItemText, ListItemIcon, Snackbar, Chip } from '@mui/material';
 import { styled } from '@mui/system';
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import AlbumIcon from '@mui/icons-material/Album';
@@ -32,13 +32,13 @@ const SongCard = ({ song }) => {
   };
 
   return (
-    <Card elevation={4}  variant='outlined' sx={{ flexDirection: { xs: 'column', md: 'row' }, height: 240, display: 'flex', width: '90%' }} className='songcard'>
+    <Card elevation={4}  variant='outlined' sx={{ flexDirection: { xs: 'column', md: 'row' }, height: 240, display: 'flex', width: '90%' ,px:1}} className='songcard'>
       <StyledCardContent   sx={{ cursor: 'pointer' }} onClick={() => handleNavigate(song._id)}>
        <Stack direction={'row'}>
        <Typography fontFamily={'Mandali'} mb={1} variant="body2" color="text.primary" fontWeight={'bold'}>
           {song.title} 
         </Typography>
-        <ArrowOutward/>
+      <Chip label={song.songNum} variant='outlined'/>
        </Stack>
         <InfoBox>
           <IconBox>

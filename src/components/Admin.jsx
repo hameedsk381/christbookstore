@@ -27,6 +27,7 @@ import api from '../apis/api';
 import Messages from './Messages';
 import WordDataGrid from './WordDataGrid';
 import logo from '../assets/logo2.jpeg'
+import PromotionDataGrid from './PromotionDataGrid';
 const drawerWidth = 240;
 
 function Admin() {
@@ -82,6 +83,7 @@ function Admin() {
         <Tab label="Songs" />
         <Tab label="Bible Messages" />
         <Tab label="Word for the day " />
+        <Tab label="Promotion posters" />
       </Tabs>
     </Box>
   );
@@ -147,6 +149,7 @@ function Admin() {
         {selectedTab === 3 && <SongsPanel />}
         {selectedTab === 4 && <Messages/> }
         {selectedTab === 5 && <WordDataGrid/> }
+        {selectedTab === 6 && <PromotionDataGrid/> }
       </Box>
     </Box>
   );
