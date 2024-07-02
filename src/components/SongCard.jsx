@@ -32,7 +32,7 @@ const SongCard = ({ song }) => {
   };
 
   return (
-    <Card elevation={4}  variant='outlined' sx={{ flexDirection: { xs: 'column', md: 'row' }, height: 240, display: 'flex', width: '90%' ,px:1}} className='songcard'>
+    <Card elevation={4}  variant='outlined' sx={{ flexDirection: { xs: 'column', md: 'row' }, height: 240, display: 'flex', width: '100%' ,px:1}} className='songcard'>
       <StyledCardContent   sx={{ cursor: 'pointer' }} onClick={() => handleNavigate(song._id)}>
        <Stack direction={'row'}>
        <Typography fontFamily={'Mandali'} mb={1} variant="body2" color="text.primary" fontWeight={'bold'}>

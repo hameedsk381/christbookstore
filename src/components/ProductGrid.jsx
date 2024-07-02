@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Grid, Typography, Container, Stack, Chip, useMediaQuery, Box, Alert, IconButton, Button } from '@mui/material';
 import { ArrowForward } from '@mui/icons-material';
 import SearchBar from './SearchBar';
@@ -9,13 +9,15 @@ import SongCard from './SongCard';
 import BookCard from './Bookcard';
 import { teluguAlphabets } from '../data/alphabets';
 import Loader from './Loader';
+import { useNavigate } from 'react-router-dom';
 
-function ProductGrid({ products, banners, categories, loading, error, songActions, alphabets, songs, book }) {
+function ProductGrid({ products, banners, categories, loading, error, songActions, alphabets, songs, book ,navigateTo }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [checkedCategories, setCheckedCategories] = useState([]);
   const [checkedAlphabets, setCheckedAlphabets] = useState([]);
   const isMobile = useMediaQuery(theme => theme.breakpoints.down('sm'));
   const scrollRefs = useRef({});
+const navigate = useNavigate();
 
   const isNumberSearch = !isNaN(searchTerm);
 
@@ -23,7 +25,7 @@ function ProductGrid({ products, banners, categories, loading, error, songAction
     const searchTermLower = searchTerm.toLowerCase();
     const searchTermNumber = parseInt(searchTerm, 10);
 
-    const matchesCategory = checkedCategories.length === 0 || checkedCategories.includes(product.category);
+    const matchesCategory = checkedCategories.length === 0 || checkedCategories.includes(product.category.name);
     const matchesAlphabet = checkedAlphabets.length === 0 || checkedAlphabets.some(alphabet => product.title.startsWith(alphabet));
 
     const matchesStringField = Object.values(product).some(field =>
@@ -44,6 +46,7 @@ function ProductGrid({ products, banners, categories, loading, error, songAction
   });
 
   const handleCategoryChange = (category) => {
+    console.log(category);
     setCheckedCategories(prev => prev.includes(category) ? prev.filter(c => c !== category) : [...prev, category]);
   };
 
@@ -52,7 +55,7 @@ function ProductGrid({ products, banners, categories, loading, error, songAction
   };
 
   const groupedProducts = filteredProducts?.reduce((groups, product) => {
-    const category = product.category;
+    const category = product.category.name;
     if (!groups[category]) {
       groups[category] = [];
     }
@@ -69,6 +72,7 @@ function ProductGrid({ products, banners, categories, loading, error, songAction
 
   if (loading) return <Loader loaderSvg="/path-to-your-loader.svg" />;
   if (error) return <div>Error fetching data</div>;
+
 
   return (
     <Container sx={{ pb: 6 }} maxWidth="lg">
@@ -91,26 +95,7 @@ function ProductGrid({ products, banners, categories, loading, error, songAction
           <OffersPoster offers={banners} />
         )
       )}
-      {categories && (
-        <Stack direction="row" display={{ xs: 'none', md: 'flex' }} spacing={1} my={3} justifyContent="flex-start" flexWrap="wrap" px={2}>
-          {categories.map((category) => (
-            <Chip
-              key={category}
-              label={category}
-              clickable
-              onClick={() => handleCategoryChange(category)}
-              sx={{
-                my: 2,
-                backgroundColor: checkedCategories.includes(category) ? 'primary.main' : 'default',
-                color: checkedCategories.includes(category) ? 'white' : 'default',
-                '&:hover': {
-                  backgroundColor: checkedCategories.includes(category) ? 'primary.dark' : 'grey.300',
-                },
-              }}
-            />
-          ))}
-        </Stack>
-      )}
+   
       {alphabets && (
         <Stack direction="row" spacing={1} my={3} justifyContent="flex-start" flexWrap="wrap">
           {teluguAlphabets.map((alphabet) => (
@@ -136,7 +121,7 @@ function ProductGrid({ products, banners, categories, loading, error, songAction
         <Box key={category} sx={{ my: 5 }}>
           <Stack direction="row" justifyContent="space-between" alignItems="center">
             <Typography fontSize={{xs:'1.1rem',md:'1.5rem'}} fontWeight={'bold'} >{category}</Typography>
-            {searchTerm === '' && <Button size='small' endIcon={<ArrowForward />} onClick={() => handleScroll(category)}>
+            {searchTerm === '' && <Button size='small' endIcon={<ArrowForward />} onClick={() => navigate(`/album/${category}`)}>
               See more
             </Button>}
           </Stack>
@@ -156,7 +141,7 @@ function ProductGrid({ products, banners, categories, loading, error, songAction
             flexDirection={searchTerm !== '' && 'row-reverse'}
           >
             {groupedProducts[category].map(product => (
-              <Box key={product._id} sx={{ minWidth: 380 }}>
+              <Box key={product._id} sx={{ minWidth: 370 }}>
                 {songs && <SongCard song={product} />}
                 {book && <BookCard product={product} />}
               </Box>
