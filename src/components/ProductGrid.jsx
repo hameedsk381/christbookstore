@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { Grid, Typography, Container, Stack, Chip, useMediaQuery, Box, Alert, IconButton, Button } from '@mui/material';
 import { ArrowForward } from '@mui/icons-material';
 import SearchBar from './SearchBar';
@@ -9,15 +9,12 @@ import SongCard from './SongCard';
 import BookCard from './Bookcard';
 import { teluguAlphabets } from '../data/alphabets';
 import Loader from './Loader';
-import { useNavigate } from 'react-router-dom';
 
-function ProductGrid({ products, banners, categories, loading, error, songActions, alphabets, songs, book ,navigateTo }) {
+function ProductGrid({ products, banners, categories, loading, error, songActions, alphabets, songs, book }) {
   const [searchTerm, setSearchTerm] = useState('');
-  const [checkedCategories, setCheckedCategories] = useState([]);
   const [checkedAlphabets, setCheckedAlphabets] = useState([]);
   const isMobile = useMediaQuery(theme => theme.breakpoints.down('sm'));
   const scrollRefs = useRef({});
-const navigate = useNavigate();
 
   const isNumberSearch = !isNaN(searchTerm);
 
@@ -25,7 +22,6 @@ const navigate = useNavigate();
     const searchTermLower = searchTerm.toLowerCase();
     const searchTermNumber = parseInt(searchTerm, 10);
 
-    const matchesCategory = checkedCategories.length === 0 || checkedCategories.includes(product.category.name);
     const matchesAlphabet = checkedAlphabets.length === 0 || checkedAlphabets.some(alphabet => product.title.startsWith(alphabet));
 
     const matchesStringField = Object.values(product).some(field =>
@@ -42,20 +38,16 @@ const navigate = useNavigate();
       ? matchesSongNum || matchesStringField || matchesNumberField
       : matchesStringField;
 
-    return matchesCategory && matchesAlphabet && matchesSearchTerm;
+    return  matchesAlphabet && matchesSearchTerm;
   });
 
-  const handleCategoryChange = (category) => {
-    console.log(category);
-    setCheckedCategories(prev => prev.includes(category) ? prev.filter(c => c !== category) : [...prev, category]);
-  };
 
   const handleAlphabetChange = (alphabet) => {
     setCheckedAlphabets(prev => prev.includes(alphabet) ? prev.filter(a => a !== alphabet) : [...prev, alphabet]);
   };
 
   const groupedProducts = filteredProducts?.reduce((groups, product) => {
-    const category = product.category.name;
+    const category = product.category;
     if (!groups[category]) {
       groups[category] = [];
     }
@@ -73,14 +65,13 @@ const navigate = useNavigate();
   if (loading) return <Loader loaderSvg="/path-to-your-loader.svg" />;
   if (error) return <div>Error fetching data</div>;
 
-
   return (
     <Container sx={{ pb: 6 }} maxWidth="lg">
       <Stack spacing={2} justifyContent="center" direction={{ xs: 'column', md: 'row' }}>
         <SearchBar onSearch={(e) => setSearchTerm(e.target.value)} searchvalue={searchTerm} />
         {songActions}
       </Stack>
-      {searchTerm === '' && checkedCategories.length === 0 && checkedAlphabets.length === 0 && (
+      {searchTerm === ''  && checkedAlphabets.length === 0 && (
         isMobile ? (
           <Container sx={{ height: 220, mt: 2 }}>
             <BlinkingComponentSwitcher components={banners.map(offer => (
@@ -121,7 +112,7 @@ const navigate = useNavigate();
         <Box key={category} sx={{ my: 5 }}>
           <Stack direction="row" justifyContent="space-between" alignItems="center">
             <Typography fontSize={{xs:'1.1rem',md:'1.5rem'}} fontWeight={'bold'} >{category}</Typography>
-            {searchTerm === '' && <Button size='small' endIcon={<ArrowForward />} onClick={() => navigate(`/album/${category}`)}>
+            {searchTerm === '' && <Button size='small' endIcon={<ArrowForward />} onClick={() => handleScroll(category)}>
               See more
             </Button>}
           </Stack>

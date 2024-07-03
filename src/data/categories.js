@@ -3,7 +3,7 @@ export const bookcategories = [
     'CHILDREN BOOKS', 'CHRISTIAN GIFTS', 'CHURCH SUPPLIES', 'BIBLE COVERS'
 ];
 export const songcategories = [
-    "ఆంధ్ర క్రైస్తవ గీతాలు",
+    "ఆంధ్ర క్రైస్తవ కీర్తనలు",
     "సీయోను గీతాలు",
     "హొసన్న గీతాలు",
     "చిన్న మంద గీతావళి",
