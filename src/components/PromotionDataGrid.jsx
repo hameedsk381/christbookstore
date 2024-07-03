@@ -9,7 +9,7 @@ const PromotionDataGrid = () => {
   const [promotions, setPromotions] = useState([]);
   const [open, setOpen] = useState(false);
   const [editMode, setEditMode] = useState(false);
-  const [currentPromotion, setCurrentPromotion] = useState({ imageUrl: '', navigateUrl: '' });
+  const [currentPromotion, setCurrentPromotion] = useState({ mobileImageUrl: '', desktopImageUrl: '', navigateUrl: '' });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
@@ -34,7 +34,7 @@ const PromotionDataGrid = () => {
   const handleClose = () => {
     setOpen(false);
     setEditMode(false);
-    setCurrentPromotion({ imageUrl: '', navigateUrl: '' });
+    setCurrentPromotion({ mobileImageUrl: '', desktopImageUrl: '', navigateUrl: '' });
   };
 
   const handleChange = (e) => {
@@ -80,7 +80,8 @@ const PromotionDataGrid = () => {
   };
 
   const columns = [
-    { field: 'imageUrl', headerName: 'Image URL', flex: 1 },
+    { field: 'mobileImageUrl', headerName: 'Mobile Image URL', flex: 1 },
+    { field: 'desktopImageUrl', headerName: 'Desktop Image URL', flex: 1 },
     { field: 'navigateUrl', headerName: 'Navigate URL', flex: 1 },
     {
       field: 'actions',
@@ -103,7 +104,7 @@ const PromotionDataGrid = () => {
   return (
     <Container>
       <Box sx={{ height: 400, width: '100%', mt: 4 }}>
-        <Button variant="contained" color="primary" startIcon={<Add />} onClick={handleOpen} sx={{mb:2}}>
+        <Button variant="contained" color="primary" startIcon={<Add />} onClick={handleOpen} sx={{ mb: 2 }}>
           Add Promotion
         </Button>
         <DataGrid
@@ -125,11 +126,20 @@ const PromotionDataGrid = () => {
           <TextField
             autoFocus
             margin="dense"
-            name="imageUrl"
-            label="Image URL"
+            name="mobileImageUrl"
+            label="Mobile Image URL"
             type="text"
             fullWidth
-            value={currentPromotion.imageUrl}
+            value={currentPromotion.mobileImageUrl}
+            onChange={handleChange}
+          />
+          <TextField
+            margin="dense"
+            name="desktopImageUrl"
+            label="Desktop Image URL"
+            type="text"
+            fullWidth
+            value={currentPromotion.desktopImageUrl}
             onChange={handleChange}
           />
           <TextField
