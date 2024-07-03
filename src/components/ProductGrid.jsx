@@ -10,7 +10,7 @@ import BookCard from './Bookcard';
 import { teluguAlphabets } from '../data/alphabets';
 import Loader from './Loader';
 
-function ProductGrid({ products, banners, categories, loading, error, songActions, alphabets, songs, book }) {
+function ProductGrid({ products, banners, loading, error, songActions, alphabets, songs, book }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [checkedAlphabets, setCheckedAlphabets] = useState([]);
   const isMobile = useMediaQuery(theme => theme.breakpoints.down('sm'));
@@ -126,8 +126,8 @@ function ProductGrid({ products, banners, categories, loading, error, songAction
               '&::-webkit-scrollbar': {
                 display: 'none',
               },
-              '-ms-overflow-style': 'none',
-              'scrollbar-width': 'none',
+              'msOverflowStyle': 'none',
+              'scrollbarWidth': 'none',
             }}
             flexDirection={searchTerm !== '' && 'row-reverse'}
           >
