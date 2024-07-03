@@ -41,6 +41,8 @@ function Admin() {
 
   const handleChange = (event, newValue) => {
     setSelectedTab(newValue);
+    // Save the current tab to session storage
+    sessionStorage.setItem('currentTab', newValue);
   };
 
   const user = useSelector((state) => state.auth.user);
@@ -48,6 +50,11 @@ function Admin() {
   const [role, setRole] = useState('user');
 
   useEffect(() => {
+    // Retrieve the current tab from session storage
+    const storedTab = parseInt(sessionStorage.getItem('currentTab'), 10);
+    if (storedTab !== null) {
+      setSelectedTab(storedTab);
+    }
     api.get(`/userProfile/${user.userId}`)
       .then((response) => {
         console.log('User Profile:', response.data.role);
