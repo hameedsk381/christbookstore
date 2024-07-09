@@ -7,7 +7,8 @@ import { serverUrl } from '../apis/serverapi';
 import Loader from './Loader';
 
 const PromotionGrid = () => {
-  const [promotions, setPromotions] = useState([]);
+const [mobileImg,setMobileImg] = useState('');
+const [desktopImg,setDesktopImg] = useState('');
   const [wordImage, setWordImage] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -16,7 +17,10 @@ const PromotionGrid = () => {
     const fetchPromotions = async () => {
       try {
         const response = await axios.get(`${serverUrl}/promotions`); // Replace with your backend URL
-        setPromotions(response.data);
+        const {mobileImageUrl} = response.data[0];
+        const {desktopImageUrl} = response.data[0];
+        setMobileImg(mobileImageUrl);
+        setDesktopImg(desktopImageUrl);
        console.log(response.data)
         setLoading(false);
       } catch (error) {
@@ -50,8 +54,8 @@ const PromotionGrid = () => {
           <Box sx={{ height: 220 }}>
          
                 <MediaCover
-             mobileUrl={promotions[0].mobileImageUrl}
-                  imageUrl={promotions[0].desktopImageUrl}
+             mobileUrl={mobileImg}
+                  imageUrl={desktopImg}
                   width="100%"
                   navigateTo={'/'}
                 />
