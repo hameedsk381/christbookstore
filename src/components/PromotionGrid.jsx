@@ -48,22 +48,20 @@ const PromotionGrid = () => {
       <Grid container spacing={3} sx={{ height: { xs: 'auto', md: 260 } }}>
         <Grid item xs={12} md={8} sx={{ height: { xs: 'auto', md: 260 } }}>
           <Box sx={{ height: 220 }}>
-            <BlinkingComponentSwitcher
-              components={promotions.map((promotion, index) => (
+         
                 <MediaCover
-                  key={index}
-                  imageUrl={promotion.imageUrl}
+             mobileUrl={promotions[0].mobileImageUrl}
+                  imageUrl={promotions[0].desktopImageUrl}
                   width="100%"
-                  navigateTo={promotion.navigateUrl}
+                  navigateTo={'/'}
                 />
-              ))}
-            />
+   
           </Box>
         </Grid>
         <Grid item xs={12} md={4} sx={{ height: { xs: 'auto', md: 240 } }}>
           {wordImage && (
             <MediaCover
-              imageUrl={wordImage.imageUrl}
+              imageUrl={wordImage}
               width="100%"
               cardheight="100%"
            
